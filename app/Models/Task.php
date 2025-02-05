@@ -26,7 +26,7 @@ class Task extends Model
         return $this->belongsTo(User::class);
     }
 
-    // relasi ke table subtask
+    // relasi ke table subtasks
     public function subtasks()
     {
         return $this->hasMany(Subtask::class);

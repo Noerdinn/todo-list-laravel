@@ -25,10 +25,11 @@ window.toggleTaskStatus = function (taskId) {
 
 function showDetailTask(taskId) {
     $.ajax({
-        url: `/tasks/${taskId}/subtasks`, // Mengambil data dari route
+        url: `/mytasks/${taskId}/subtasks`, // Mengambil data dari route
         type: "GET",
         dataType: "json",
         success: function (response) {
+            console.log(response);
             // Ganti judul & deskripsi task utama
             $("#task-title").text(response.title);
             $("#task-desc").text(response.description);
@@ -45,18 +46,30 @@ function showDetailTask(taskId) {
                         : '<i class="text-xl fa-regular fa-circle"></i>';
 
                     let subtaskItem = `
-                        <div class="flex justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black shadow">
+                        <div
+                            class="flex justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)]">
                             <div class="flex">
-                                <button class="flex items-center">${statusIcon}</button>
-                                <p class="mx-2 font-medium capitalize">${subtask.title}</p>
+                                <button class="flex items-center">
+                                ${statusIcon}
+                                </button>
+                                <p class="mx-2 font-medium duration-1000 capitalize">
+                                ${subtask.title}</p>
                             </div>
-                        </div>`;
+                            <div class="flex"> 
+                                <form class="flex h-full">
+                                    <button class="flex h-full items-center">
+                                        <i class="fa-regular fa-circle-xmark text-xl"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        `;
 
                     subtasksContainer.append(subtaskItem);
                 });
             } else {
                 subtasksContainer.append(
-                    '<p class="text-gray-500">Tidak ada subtask.</p>'
+                    '<p class="text-white bg-black text-center">Tidak ada subtask.</p>'
                 );
             }
         },

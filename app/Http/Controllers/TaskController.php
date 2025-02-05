@@ -32,7 +32,24 @@ class TaskController extends Controller
     public function showDetail($id)
     {
         $task = Task::with('subtasks')->findOrFail($id);
-        return response()->json($task);
+
+        if (!$task) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
+
+        return response()->json([
+            'title' => $task->title,
+            'description' => $task->description,
+            'due_date' => $task->due_date,
+            'is_complete' => $task->is_complete,
+            'priority' => $task->priority,
+            'subtasks' => $task->subtasks->map(function ($subtask) {
+                return [
+                    'title' => $subtask->title,
+                    'is_complete' => $subtask->is_complete,
+                ];
+            }),
+        ]);
     }
 
     /**

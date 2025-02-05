@@ -11,21 +11,16 @@ Route::get('/', function () {
 })->name('welcome.page');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/home', [AuthController::class, 'showHome'])->name('home.page');
-
     Route::get('/mydays', function () {
         return view('mydays');
     })->name('mydays.page');
-
     Route::get('/mytasks', [TaskController::class, 'index'])->name('mytasks.page');
     Route::post('/mytasks', [TaskController::class, 'store'])->name('mytasks.store');
     Route::put('/mytasks/{task}', [TaskController::class, 'update'])->name('mytasks.update');
     Route::delete('/mytasks/{task}', [TaskController::class, 'destroy'])->name('mytasks.delete');
     Route::post('/mytasks/{task}/toggle', [TaskController::class, 'toggleStatus'])->name('mytask.toggle');
-
     Route::get('/mytasks/{id}/subtasks', [TaskController::class, 'showDetail']);
-
     Route::post('/home/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

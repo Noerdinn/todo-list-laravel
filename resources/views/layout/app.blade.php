@@ -14,6 +14,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
+
 </head>
 
 <body class="h-screen">
@@ -29,6 +30,7 @@
             @yield('content')
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @vite('resources/js/app.js')
 
 </body>
