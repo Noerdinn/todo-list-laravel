@@ -39,7 +39,7 @@
                             Date</label>
 
                         <div class="relative max-w-sm">
-                            <input id="default-datepicker" type="date" name="due_date"
+                            <input id="due_date" type="date" name="due_date"
                                 class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5">
                         </div>
 
@@ -49,7 +49,7 @@
                             Priority</label>
                         <select id="priority" name="priority"
                             class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5">
-                            <option selected>Skala Prioritas</option>
+                            {{-- <option selected>Skala Prioritas</option> --}}
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>

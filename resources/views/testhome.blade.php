@@ -1,29 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.app')
+@section('title', 'My Tasks')
+@section('content')
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @vite('resources/css/app.css')
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <div>
+        <img src="{{ asset('img/laptop.svg') }}" alt="">
+        <p class="text-black h-full flex items-center justify-center">Tidak ada task yang dipilih</p>
+    </div>
 
-<body class="h-screen">
-    <div class="grid grid-rows-[auto_1fr] grid-cols-[auto_1fr] h-full">
-        <div class="row-start-1 row-end-2 col-start-2 col-end-3">
-            <x-navbar></x-navbar>
+    <div class="flex-grow-1 bg-green-200 p-4">
+        <div class="mb-3">
+            <p class="text-xl font-medium me-2">Detail Task</p>
         </div>
-        <div class="row-start-1 row-end-3 col-start-1 col-end-2 ">
-            <x-sidebar></x-sidebar>
+        <h1 id="task-title" class="text-3xl font-semibold capitalize">${
+            taskData.title
+            }</h1>
+        <div class="mt-4">
+            <p class="text-lg font-medium mb-2">Description</p>
+            <p id="task-desc" class="text-base font-normal ">${
+                taskData.description
+                }</p>
         </div>
-        <div class="row-start-2 row-end-3 col-start-2 col-end-3 col-span-8  overflow-y-scroll">
-            <x-main-content></x-main-content>
+
+        <div class="mt-4 ">
+            <p class="text-lg font-medium mb-2">Tasks</p>
+
+            <div id="subtasks-container">
+                ${
+                taskData.subtasks.length
+                ? taskData.subtasks.map(renderSubtask).join("")
+                : ``
+                }
+            </div>
+        </div>
+    </div>
+    <div class="sticky bottom-0 bg-pink-300 px-4 py-5">
+        <div class="flex items-center gap-3">
+            <input type="text" id="subtask-title"
+                class="border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
+                placeholder="Add new subtask">
+            <button id="add-subtask-btn" class="bg-black text-white p-2 px-4 rounded-lg">+Add</button>
         </div>
     </div>
 
-</body>
 
-</html>
+@endsection

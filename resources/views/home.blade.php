@@ -14,18 +14,14 @@
                 <div class="grid grid-rows-[auto_1fr] grid-cols-6 mt-8 gap-4">
                     <div
                         class="flex items-center justify-center bg-white row-start-1 row-end-3 col-start-2 col-span-2 rounded-lg border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)] h-20">
-                        <span class="material-symbols-outlined">
-                            check_circle
-                        </span>
-                        <p class="text-lg ms-1 font-semibold">Task Complete <strong
+                        <i class="text-2xl fa-regular fa-circle-check"></i>
+                        <p class="text-lg ms-1.5 font-semibold">Task Complete <strong
                                 class="font-black">{{ $completeTask }}</strong></p>
                     </div>
                     <div
                         class="flex items-center justify-center bg-white row-start-1 row-end-3 col-span-2 rounded-lg border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
-                        <span class="material-symbols-outlined">
-                            radio_button_unchecked
-                        </span>
-                        <p class="text-lg ms-1 font-semibold">Task Incomplete <strong
+                        <i class="text-2xl fa-regular fa-circle"></i>
+                        <p class="text-lg ms-1.5 font-semibold">Task Incomplete <strong
                                 class="font-black">{{ $incompleteTasks }}</strong></p>
                     </div>
                     <div

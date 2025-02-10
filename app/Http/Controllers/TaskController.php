@@ -18,7 +18,8 @@ class TaskController extends Controller
     // Nampilin konten halaman mytasks
     public function index(Request $request)
     {
-        $tasks = Task::where('user_id', Auth::id())->get();
+        $tasks = Task::where('user_id', Auth::id())->orderByRaw("CASE WHEN priority = 'high' THEN 1 ELSE 2 END")
+            ->orderBy('due_date', 'desc')->get();
 
         $editTask = null;
         if ($request->has('edit')) {
@@ -26,30 +27,6 @@ class TaskController extends Controller
         }
 
         return view('mytasks', compact('tasks'));
-    }
-
-    // untuk menampilkan detail list
-    public function showDetail($id)
-    {
-        $task = Task::with('subtasks')->findOrFail($id);
-
-        if (!$task) {
-            return response()->json(['error' => 'Task not found'], 404);
-        }
-
-        return response()->json([
-            'title' => $task->title,
-            'description' => $task->description,
-            'due_date' => $task->due_date,
-            'is_complete' => $task->is_complete,
-            'priority' => $task->priority,
-            'subtasks' => $task->subtasks->map(function ($subtask) {
-                return [
-                    'title' => $subtask->title,
-                    'is_complete' => $subtask->is_complete,
-                ];
-            }),
-        ]);
     }
 
     /**
@@ -112,5 +89,13 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('mytasks.page')->with('success', 'Task delete successfully');
+    }
+
+    // menampilkan task history
+    public function showHistory()
+    {
+        $tasks = Task::where('user_id', Auth::id())->get();
+
+        return view('history', compact('tasks'));
     }
 }

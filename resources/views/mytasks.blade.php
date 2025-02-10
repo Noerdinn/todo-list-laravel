@@ -9,43 +9,32 @@
                     <div class="col-start-1 col-span-4">
                         <!-- Modal toggle -->
                         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                            class="block p-2 rounded-lg text-black border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-300 transition-all border-2 font-medium text-base w-full"
-                            type="button">
+                            class="block btn-neo font-medium text-base w-full" type="button">
                             Create Task
                         </button>
                     </div>
                     <div class="col-span-8">
-
                         <x-searchbar></x-searchbar>
                     </div>
                 </div>
-
-
                 <!-- Main modal untuk create task -->
                 <x-modal-create></x-modal-create>
             </div>
 
 
             <div {{-- konten task --}}
-                class="row-start-2 row-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full p-4 border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
+                class="row-start-2 row-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full p-4 border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)] ">
                 <div class="flex mb-3">
-                    <p class="text-xl font-medium me-2">List</p>
-                    <button class="flex items-center">
-                        <span class="material-symbols-outlined">
-                            filter_list
-                        </span>
-                    </button>
-
+                    <p class="text-xl font-medium me-2">Task</p>
                 </div>
-
 
                 <div>
                     @foreach ($tasks as $task)
-                        <div
-                            class="flex justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)]">
+                        <div class="flex justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)]"
+                            data-task-id="{{ $task->id }}">
                             <div class="flex">
                                 {{-- update is_complete selesai atau tidak selesai menggunakan ajax --}}
-                                <button onclick="toggleTaskStatus({{ $task->id }})" class="flex items-center">
+                                <button class="flex items-center">
                                     <i
                                         class="text-xl {{ $task->is_complete ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle' }}"></i>
                                 </button>
@@ -137,9 +126,17 @@
                                                     <label for="priority"
                                                         class="block mb-2 text-base font-medium text-black">Select
                                                         Priority</label>
-                                                    <input type="text" name="priority" id="priority"
-                                                        class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"
-                                                        required="" value="{{ $task->priority }}">
+                                                    <select id="priority" name="priority"
+                                                        class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5">
+                                                        {{-- <option selected>Skala Prioritas</option> --}}
+                                                        <option value="low"
+                                                            {{ $task->priority == 'low' ? 'selected' : '' }}>Low</option>
+                                                        <option value="medium"
+                                                            {{ $task->priority == 'medium' ? 'selected' : '' }}>Medium
+                                                        </option>
+                                                        <option value="high"
+                                                            {{ $task->priority == 'high' ? 'selected' : '' }}>High</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -155,33 +152,16 @@
                     @endforeach
                 </div>
             </div>
-
-            <div {{-- detail dari task yang di tekan --}}
-                class="row-start-2 row-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full p-4 border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
-                <div class="mb-3">
-                    <p class="text-xl font-medium me-2">Detail</p>
-                </div>
-                <div>
-                    <div>
-                        <h1 id="task-title" class="text-3xl font-semibold capitalize">Title Task</h1>
-                        <div class="mt-4">
-                            <p class="text-lg font-medium mb-2">Description</p>
-                            <p id="task-desc" class="text-base font-normal ">Lorem ipsum dolor sit, amet consectetur
-                                adipisicing
-                                elit. Cumque animi ipsum, similique et velit vero ipsa possimus illum autem corporis.</p>
-                        </div>
-
-                        <div class="mt-4 ">
-                            <p class="text-lg font-medium mb-2">Tasks</p>
-                            <div id="subtasks-container" class="overflow-y-auto">
-                                {{-- tempat menampilkan subtask --}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {{-- untuk menyimpan id dari task yang di tekan --}}
+            <input id="current-task-id" class="text-black hidden" value=""></input>
+            {{-- detail dari task yang di tekan --}}
+            <div id="task-detail-container"
+                class="row-start-2 row-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
+                {{-- detail akan ditampilkan disini --}}
             </div>
         </div>
     </div>
+
 
 
 @endsection

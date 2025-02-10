@@ -4,8 +4,7 @@
     <div class="h-full px-4 py-4 overflow-y-auto bg-white ">
         <ul class="space-y-2 font-medium font-MadeforText">
             <li>
-                <a href="{{ route('home.page') }}"
-                    class="flex items-center p-2 rounded-lg text-black border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-300 transition-all border-2 mb-10 text-center w-full group">
+                <a href="{{ route('home.page') }}" class="flex items-center btn-neo mb-10 text-center w-full group">
                     <p class="text-center w-full font-black font-MadeforDisplay text-2xl">Rentjana</p>
                 </a>
             </li>
@@ -28,7 +27,7 @@
             </li>
 
             <li>
-                <a href="{{ route('mydays.page') }}"
+                <a href="{{ route('history.page') }}"
                     class="flex items-center py-2 px-4 rounded-lg text-black border-black  hover:bg-gray-300 transition-all border-2 mb-5 group {{ Route::currentRouteName() === 'mydays.page' ? 'translate-y-1.5 shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] bg-gray-300' : 'shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]' }}">
                     <i class="fa-regular fa-clock"></i>
                     <span class="flex-1 ms-3 whitespace-nowrap">History</span>

@@ -31,4 +31,12 @@ class Task extends Model
     {
         return $this->hasMany(Subtask::class);
     }
+
+    // fungsi untuk mengecek semua status dari subtask 
+    public function allSubtasksComplete()
+    {
+        return $this->subtasks->every(function ($subtask) {
+            return $subtask->is_complete;
+        });
+    }
 }

@@ -23,7 +23,7 @@
                 <img class="w-8 h-8 rounded-full" src="{{ asset('img/Mina Myoi.jpg') }}" alt="user photo">
             </button>
             <!-- Dropdown menu -->
-            <div class="z-50 hidden my-4 text-base list-none bg-white border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)] divide-y divide-black rounded-lg "
+            <div class="z-40 hidden my-4 text-base list-none bg-white border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)] divide-y divide-black rounded-lg "
                 id="user-dropdown">
                 <div class="px-4 py-3">
                     <span class="block text-sm text-black font-medium">{{ $user->name }}</span>
@@ -35,9 +35,13 @@
                             class="block px-4 py-2 text-sm text-black hover:bg-black hover:text-white">Settings</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                            class="block w-full text-left px-4 py-2 text-sm text-black hover:bg-black hover:text-white">
+                            Sign out
+                        </button>
+                        {{-- <a href="#"
                             class="block px-4 py-2 text-sm text-black hover:bg-black hover:text-white">Sign
-                            out</a>
+                            out</a> --}}
                     </li>
                 </ul>
             </div>
