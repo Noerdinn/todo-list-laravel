@@ -35,8 +35,19 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script>
 
-    @vite('resources/js/app.js')
 
+
+
+    @vite('resources/js/app.js')
 </body>
+@if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            showAlert('success', "{{ session('success') }}");
+        });
+    </script>
+@endif
+
+
 
 </html>

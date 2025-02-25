@@ -14,10 +14,13 @@
                             Priority
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Due Date
+                            Deadline
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Created At
                         </th>
                         <th scope="col" class="px-6 py-3">
                             <span class="sr-only">Edit</span>
@@ -34,14 +37,14 @@
                                 {{ $task->priority }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $task->due_date }}
+                                {{ $task->deadline }}
                             </td>
                             <td class="px-6 py-4">
                                 {{-- nanti tambahkan kolom baru untuk end_at --}}
                                 {{ $task->is_complete ? 'Selesai' : 'Belum Selesai' }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $task->created_at }}
+                                {{ $task->created_at->format('d M Y') }}
                             </td>
                             {{-- <td class="px-6 py-4 text-right">
                                 <a href="#" class="font-medium text-black hover:underline">Edit</a>

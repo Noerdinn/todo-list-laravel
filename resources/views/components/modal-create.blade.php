@@ -35,11 +35,11 @@
                             class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"></textarea>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="due_date" class="block mb-2 text-base font-medium text-black">Due
+                        <label for="deadline" class="block mb-2 text-base font-medium text-black">Due
                             Date</label>
 
                         <div class="relative max-w-sm">
-                            <input id="due_date" type="date" name="due_date"
+                            <input id="deadline" type="date" name="deadline"
                                 class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5">
                         </div>
 

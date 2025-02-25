@@ -41,13 +41,13 @@
                                 placeholder="$desc" value="{{ $task->description }}">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="due_date" class="block mb-2 text-base font-medium text-black">Due
+                            <label for="deadline" class="block mb-2 text-base font-medium text-black">Due
                                 Date</label>
 
                             <div class="relative max-w-sm">
-                                <input id="due_date-{{ $task->id }}" type="date" name="due_date"
+                                <input id="deadline-{{ $task->id }}" type="date" name="deadline"
                                     class="bg-white border-2 border-black text-black text-sm rounded-lg outline-none block w-full p-2.5"
-                                    placeholder="Select date" value="{{ $task->due_date }}">
+                                    placeholder="Select date" value="{{ $task->deadline }}">
                             </div>
 
                         </div>

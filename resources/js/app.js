@@ -1,4 +1,5 @@
 import "./bootstrap";
+import "./alert";
 
 // window.toggleTaskStatus = function (taskId) {
 //     fetch(`/mytasks/${taskId}/toggle`, {
@@ -49,7 +50,6 @@ async function showDetailTask(taskId = null) {
     );
     const currentTaskIdInput = document.getElementById("current-task-id");
 
-    const imageUrl = "{{ asset('/img/Gambar 2.jpg') }}";
     if (!taskId) {
         currentTaskIdInput.value = null;
         taskDetailContainer.innerHTML = `

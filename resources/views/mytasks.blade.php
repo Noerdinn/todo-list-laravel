@@ -3,17 +3,18 @@
 @section('content')
 
     <div class="p-4 h-full ">
-        <div class="grid grid-rows-10 grid-cols-2 gap-4 font-MadeforText h-full">
-            <div class="row-start-1 row-span-1">
-                <div class="grid grid-rows-1 grid-cols-12 gap-4">
-                    <div class="col-start-1 col-span-4">
+        <div class="grid grid-rows-[auto_1fr] grid-cols-2 gap-4 font-MadeforText h-full">
+            <div class="row-start-1 h-min">
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                    <div class="md:col-span-4">
                         <!-- Modal toggle -->
                         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
                             class="block btn-neo font-medium text-base w-full" type="button">
                             Create Task
                         </button>
                     </div>
-                    <div class="col-span-8">
+                    <div class="md:col-span-8">
                         <x-searchbar></x-searchbar>
                     </div>
                 </div>
@@ -23,7 +24,7 @@
 
 
             <div {{-- konten task --}}
-                class="row-start-2 row-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full p-4 border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)] ">
+                class="row-start-2 overflow-y-auto scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full p-4 border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)] ">
                 <div class="flex mb-3">
                     <p class="text-xl font-medium me-2">Task</p>
                 </div>
@@ -39,9 +40,11 @@
                                         class="text-xl {{ $task->is_complete ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle' }}"></i>
                                 </button>
                                 <p
-                                    class="mx-2 font-medium duration-1000 capitalize {{ $task->is_complete ? 'line-through transition-transform ' : '' }}">
+                                    class="mx-2 font-medium duration-1000 capitalize {{ $task->is_complete ? 'line-through transition-transform text-gray-500' : '' }}">
                                     {{ $task->title }}</p>
                                 {{-- triger modal update --}}
+                                @if ($task->is_complete == 1)
+                                @endif
                                 <button class="flex items-center" data-modal-target="edit-modal-{{ $task->id }}"
                                     data-modal-toggle="edit-modal-{{ $task->id }}">
                                     <i class="fa-regular fa-pen-to-square text-lg"></i>
@@ -55,12 +58,15 @@
                                 </button>
                             </div>
                             <div class="flex"> {{-- haput task --}}
-                                <form action="{{ route('mytasks.delete', $task->id) }}" method="POST" class="flex h-full">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="flex h-full items-center">
+                                <div class="flex h-full">
+                                    <button class="flex h-full items-center delete-task" data-task-id="{{ $task->id }}">
                                         <i class="fa-regular fa-circle-xmark text-xl"></i>
                                     </button>
+                                </div>
+                                <form id="delete-form-{{ $task->id }}"
+                                    action="{{ route('mytasks.delete', $task->id) }}" method="POST" class="hidden">
+                                    @csrf
+                                    @method('DELETE')
                                 </form>
                             </div>
                         </div>
@@ -110,15 +116,15 @@
                                                         value="">{{ $task->description }}</textarea>
                                                 </div>
                                                 <div class="col-span-2 sm:col-span-1">
-                                                    <label for="due_date"
+                                                    <label for="deadline"
                                                         class="block mb-2 text-base font-medium text-black">Due
                                                         Date</label>
 
                                                     <div class="relative max-w-sm">
-                                                        <input id="due_date-{{ $task->id }}" type="date"
-                                                            name="due_date"
+                                                        <input id="deadline-{{ $task->id }}" type="date"
+                                                            name="deadline"
                                                             class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"
-                                                            value="{{ $task->due_date }}">
+                                                            value="{{ $task->deadline }}">
                                                     </div>
 
                                                 </div>

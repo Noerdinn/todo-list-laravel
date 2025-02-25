@@ -20,7 +20,7 @@ class SubtaskController extends Controller
         return response()->json([
             'title' => $task->title,
             'description' => $task->description,
-            'due_date' => $task->due_date,
+            'deadline' => $task->deadline,
             'is_complete' => $task->is_complete,
             'priority' => $task->priority,
             'subtasks' => $task->subtasks->map(function ($subtask) {

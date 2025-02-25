@@ -19,7 +19,7 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $tasks = Task::where('user_id', Auth::id())->orderByRaw("CASE WHEN priority = 'high' THEN 1 ELSE 2 END")
-            ->orderBy('due_date', 'desc')->get();
+            ->orderBy('deadline', 'desc')->get();
 
         $editTask = null;
         if ($request->has('edit')) {
@@ -37,7 +37,7 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
-            'due_date' => 'nullable|date',
+            'deadline' => 'nullable|date',
             'priority' => 'required|string|in:low,medium,high',
         ]);
 
@@ -45,7 +45,7 @@ class TaskController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
-            'due_date' => $request->due_date,
+            'deadline' => $request->deadline,
             'priority' => $request->priority,
             'is_complete' => false,
         ]);
@@ -71,7 +71,7 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
-            'due_date' => 'nullable|date',
+            'deadline' => 'nullable|date',
             'priority' => 'required|string|in:low,medium,high',
         ]);
 

@@ -2,7 +2,7 @@
     $pageTitles = [
         'home.page' => 'Home',
         'mytasks.page' => 'My Tasks',
-        'mydays.page' => 'Recent',
+        'history.page' => 'History',
     ];
 
     $currentRoute = Route::currentRouteName();
