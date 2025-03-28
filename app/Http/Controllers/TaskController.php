@@ -7,31 +7,25 @@ use App\Models\Task;
 // use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth;
 
-use function Illuminate\Foundation\Configuration\respond;
-use function Pest\dd;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     // Nampilin konten halaman mytasks
     public function index(Request $request)
     {
-        $tasks = Task::where('user_id', Auth::id())->orderByRaw("CASE WHEN priority = 'high' THEN 1 ELSE 2 END")
-            ->orderBy('deadline', 'desc')->get();
+        $tasks = Task::where('user_id', Auth::id())->orderBy('priority', 'desc')->get();
+        // $tasks = Task::where('user_id', Auth::id())->orderByRaw("CASE WHEN priority = 'high' THEN 1 ELSE 2 END")
+        //     ->orderBy('created_at', 'asc')->get();
 
-        $editTask = null;
-        if ($request->has('edit')) {
-            $editTask = Task::where('id', $request->edit)->where('user_id', Auth::id())->first();
-        }
+        // $editTask = null;
+        // if ($request->has('edit')) {
+        //     $editTask = Task::where('id', $request->edit)->where('user_id', Auth::id())->first();
+        // }
 
         return view('mytasks', compact('tasks'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // create subtask
     public function store(Request $request)
     {
         $request->validate([
@@ -52,37 +46,45 @@ class TaskController extends Controller
         return redirect()->route('mytasks.page')->with('success', 'Task created successfully');
     }
 
+    // button task status
     public function toggleStatus(Task $task)
     {
         $task->is_complete = !$task->is_complete;
+        // jika status true maka waktu ditambahkan ke complete_at
+        $task->complete_at = $task->is_complete ? now() : null;
         $task->save();
 
         // untuk ajax respons
         return response()->json(['success' => true, 'is_complete' => $task->is_complete]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // memunculkan form edit
+    public function edit(Task $task)
     {
-        $task = Task::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'nullable',
-            'deadline' => 'nullable|date',
-            'priority' => 'required|string|in:low,medium,high',
-        ]);
-
-        $task->update($request->all());
-
-        return redirect()->route('mytasks.page')->with('success', 'Task Update Successfully');
+        return view('tasks.edit', compact('task'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // update / edit task
+    public function update(Request $request, Task $task)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'deadline' => 'nullable|date',
+            'priority' => 'required|in:low,medium,high',
+        ]);
+
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'deadline' => $request->deadline,
+            'priority' => $request->priority,
+        ]);
+
+        return response()->json(['message' => 'Task updated successfully']);
+    }
+
+    // hapus task
     public function destroy(string $id)
     {
         $task = Task::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
@@ -94,7 +96,7 @@ class TaskController extends Controller
     // menampilkan task history
     public function showHistory()
     {
-        $tasks = Task::where('user_id', Auth::id())->get();
+        $tasks = Task::where('user_id', Auth::id())->where('is_complete', true)->get();
 
         return view('history', compact('tasks'));
     }

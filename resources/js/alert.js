@@ -19,35 +19,35 @@ window.showAlert = function (type, message) {
     });
 };
 
-// alert delete task
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".delete-task").forEach((button) => {
-        button.addEventListener("click", function () {
-            let taskId = this.getAttribute("data-task-id");
-            Swal.fire({
-                title: "Are you sure?",
-                text: "This task will be permanently deleted!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "Cancel",
-                customClass: {
-                    popup: "custom-swal-popup",
-                    title: "custom-swal-title", // Untuk judul
-                    content: "custom-swal-content", // Untuk teks isi
-                    confirmButton: "custom-swal-delete-button",
-                    cancelButton: "custom-swal-cancel-button",
-                },
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(`delete-form-${taskId}`).submit();
-                }
-            });
-        });
-    });
-});
+// // alert delete task
+// document.addEventListener("DOMContentLoaded", function () {
+//     document.querySelectorAll(".delete-task").forEach((button) => {
+//         button.addEventListener("click", function () {
+//             let taskId = this.getAttribute("data-task-id");
+//             Swal.fire({
+//                 title: "Are you sure?",
+//                 text: "This task will be permanently deleted!",
+//                 icon: "warning",
+//                 showCancelButton: true,
+//                 confirmButtonColor: "#d33",
+//                 cancelButtonColor: "#3085d6",
+//                 confirmButtonText: "Yes, delete it!",
+//                 cancelButtonText: "Cancel",
+//                 customClass: {
+//                     popup: "custom-swal-popup",
+//                     title: "custom-swal-title", // Untuk judul
+//                     content: "custom-swal-content", // Untuk teks isi
+//                     confirmButton: "custom-swal-delete-button",
+//                     cancelButton: "custom-swal-cancel-button",
+//                 },
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     document.getElementById(`delete-form-${taskId}`).submit();
+//                 }
+//             });
+//         });
+//     });
+// });
 
 // alert logout akun
 document.addEventListener("DOMContentLoaded", function () {

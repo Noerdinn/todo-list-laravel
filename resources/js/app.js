@@ -1,124 +1,191 @@
 import "./bootstrap";
 import "./alert";
 
-// window.toggleTaskStatus = function (taskId) {
-//     fetch(`/mytasks/${taskId}/toggle`, {
-//         method: "POST",
-//         headers: {
-//             "X-CSRF-TOKEN": document
-//                 .querySelector('meta[name="csrf-token"]')
-//                 .getAttribute("content"),
-//             "Content-Type": "application/json",
-//         },
-//     })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             if (data.success) {
-//                 location.reload(); // Refresh halaman untuk update tampilan
-//             } else {
-//                 alert("Failed to toggle task status.");
-//             }
-//         })
-//         .catch((error) => {
-//             console.error("Error:", error);
-//         });
-// };
-
-function updateTaskStatus(taskId, isComplete) {
-    const taskElement = document.querySelector(`[data-task-id="${taskId}"]`);
-    if (!taskElement) return;
-
-    const icon = taskElement.querySelector(".fa-regular");
-    const title = taskElement.querySelector("p");
-
-    if (isComplete) {
-        icon.classList.replace("fa-circle", "fa-circle-check");
-        title.classList.add("line-through");
-    } else {
-        icon.classList.replace("fa-circle-check", "fa-circle");
-        title.classList.remove("line-through");
-    }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     showDetailTask(null);
 });
-
+// fungsi untuk menampilkan detail task
 async function showDetailTask(taskId = null) {
     const taskDetailContainer = document.getElementById(
         "task-detail-container"
     );
     const currentTaskIdInput = document.getElementById("current-task-id");
 
+    // update hidden input
+    currentTaskIdInput.value = taskId || "";
+
+    // jika task id false atau kosong maka tampilkan ini
     if (!taskId) {
-        currentTaskIdInput.value = null;
         taskDetailContainer.innerHTML = `
         <div class="h-full flex items-center justify-center">
-            <div class="text-center">            
-            <i class="fa-solid fa-eye text-9xl text-gray-400 mb-4"></i>
-                <p class="text-black text-lg">Tidak ada task yang dipilih.</p>
-                <p class="text-black text-lg">Tekan icon mata pada task yang ingin ditampilkan.</p>
+            <div class="text-center">
+                <i class="fa-solid fa-eye md:text-9xl text-7xl text-gray-400 mb-4"></i>
+                <p class="text-black md:text-lg text-base">Tidak ada task yang dipilih.</p>
+                <p class="text-black md:text-lg text-base">Tekan icon mata pada task yang ingin ditampilkan.</p>
             </div>
         </div>`;
         return;
     }
-    currentTaskIdInput.value = taskId;
+
     try {
+        // Tampilkan loading state
+        taskDetailContainer.innerHTML = `
+            <div class="h-full flex items-center justify-center">
+                <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-black"></div>
+            </div>`;
+
         const response = await fetch(`/mytasks/${taskId}/subtasks`);
         if (!response.ok) throw new Error("Gagal mengambil data subtasks.");
 
-        const taskData = await response.json();
-        renderTaskDetail(taskData);
+        // menyisipkan content html
+        const html = await response.text();
+        taskDetailContainer.innerHTML = html;
+
+        // Update task list styling
+        document.querySelectorAll(".task-item").forEach((item) => {
+            item.classList.add("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
+            item.classList.remove("bg-[#f0f0f0]", "translate-y-[3px]");
+            if (item.dataset.taskId === taskId.toString()) {
+                item.classList.add("bg-[#f0f0f0]", "translate-y-[3px]");
+                item.classList.remove("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
+            }
+        });
     } catch (error) {
-        alert(error.message);
+        showAlert("error", error.message);
     }
 }
-// funsgi untuk merender bagian detail task, yg di dalamnya akan diisi subtask
-function renderTaskDetail(taskData) {
+// fungsi untuk tombol mengubah status task
+window.toggleTaskStatus = function (taskId) {
+    fetch(`/mytasks/${taskId}/toggle`, {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // location.reload(); // Refresh halaman untuk update tampilan
+                const taskItem = document.querySelector(
+                    `[data-task-id="${taskId}"]`
+                );
+
+                const toggleIcon = taskItem.querySelector(
+                    ".toggle-task-status"
+                );
+                const successLable = document.querySelector(
+                    `[data-lable-id="${taskId}"]`
+                );
+                const itemList = taskItem.querySelector(".title-task");
+                if (data.is_complete) {
+                    itemList.classList.add("line-through", "text-gray-500");
+                    toggleIcon.classList.add("fa-circle-check");
+                    toggleIcon.classList.remove("fa-circle");
+                    successLable.classList.remove("hidden");
+                } else {
+                    itemList.classList.remove("line-through", "text-gray-500");
+                    toggleIcon.classList.remove("fa-circle-check");
+                    toggleIcon.classList.add("fa-circle");
+                    successLable.classList.add("hidden");
+                }
+            } else {
+                showAlert("error", "Failed to toggle task status.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+};
+// fungsi untuk menghapus task utama
+document.addEventListener("click", function (event) {
+    if (event.target.closest(".delete-task")) {
+        let button = event.target.closest(".delete-task");
+        let taskId = button.getAttribute("data-task-id");
+
+        // alert delete task
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This task will be permanently deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel",
+            customClass: {
+                popup: "custom-swal-popup",
+                title: "custom-swal-title", // Untuk judul
+                content: "custom-swal-content", // Untuk teks isi
+                confirmButton: "custom-swal-delete-button",
+                cancelButton: "custom-swal-cancel-button",
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`delete-form-${taskId}`).submit();
+            }
+        });
+    }
+});
+
+// Fungsi untuk menampilkan form edit task
+async function showEditTask(taskId) {
     const taskDetailContainer = document.getElementById(
         "task-detail-container"
     );
-    taskDetailContainer.innerHTML = `
-    
-    <div class="flex-grow-1 p-4">
-        <div class="mb-3">
-            <p class="text-xl font-medium me-2">Detail Task</p>
-        </div>
-        <h1 id="task-title" class="text-3xl font-semibold capitalize">${
-            taskData.title
-        }</h1>
-        <div class="mt-4">
-            <p class="text-lg font-medium mb-2">Description</p>
-            <p id="task-desc" class="text-base font-normal ">${
-                taskData.description
-            }</p>
-        </div>
 
-        <div class="mt-4 ">
-            <p class="text-lg font-medium mb-2">Tasks</p>
+    try {
+        // Tampilkan loading sementara
+        taskDetailContainer.innerHTML = `
+            <div class="h-full flex items-center justify-center">
+                <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-black"></div>
+            </div>`;
 
-            <div id="subtasks-container">
-                ${
-                    taskData.subtasks.length
-                        ? taskData.subtasks.map(renderSubtask).join("")
-                        : ``
-                }
-            </div>
-        </div>
-    </div>
-    <div class="sticky bottom-0 p-4 bg-white">
-        <div class="flex items-center gap-3">
-            <input type="text" id="subtask-title"
-                class="border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
-                placeholder="Add new subtask">
-            <button id="add-subtask-btn" class="bg-black text-white p-2 px-4 rounded-lg">+Add</button>
-        </div>
-    </div>
+        // Fetch form edit dari server
+        const response = await fetch(`/mytasks/${taskId}/edit`);
+        if (!response.ok) throw new Error("Gagal mengambil form edit.");
 
-
-    `;
+        const html = await response.text();
+        taskDetailContainer.innerHTML = html;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
+// fungsi untuk mensubmit hasil edit
+async function updateTask(event, taskId) {
+    event.preventDefault();
+
+    const form = document.getElementById(`edit-task-form-${taskId}`);
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(`/mytasks/${taskId}`, {
+            method: "POST",
+            body: formData,
+        });
+
+        if (!response.ok) throw new Error("Gagal mengupdate task.");
+
+        // nilai baru dari input
+        const updateTitle = form.querySelector('input[name="title"]').value;
+
+        // perbarui title tanpa refresh
+        const titleElemen = document.querySelector(
+            `.title-task[data-task-id="${taskId}"]`
+        );
+        if (titleElemen) {
+            titleElemen.textContent = updateTitle;
+        }
+        showDetailTask(taskId); // Kembali ke tampilan detail setelah update
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// =====subtask=====
 document.addEventListener("click", async (event) => {
     if (event.target.id === "add-subtask-btn") {
         await handleAddSubtask();
@@ -128,49 +195,49 @@ document.addEventListener("click", async (event) => {
         await handleDeleteSubtask(event);
     }
 });
-// fungsi untuk menambah subtask baru
+// fungsi untuk membuat subtask
 async function handleAddSubtask() {
     const title = document.getElementById("subtask-title").value.trim();
     const taskId = document.getElementById("current-task-id").value;
 
-    if (!title) return alert("Title cannot be empty");
-    if (!taskId) return alert("Please select the task");
-
-    try {
-        const response = await fetch(`/mytasks/${taskId}/subtask`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": document.querySelector(
-                    'meta[name="csrf-token"]'
-                ).content,
-            },
-            body: JSON.stringify({ title }),
-        });
-
-        if (!response.ok) throw new Error("Failed create new subtask");
-
-        const data = await response.json();
-        document
-            .getElementById("subtasks-container")
-            .insertAdjacentHTML("beforeend", renderSubtask(data.subtask));
-        document.getElementById("subtask-title").value = "";
-
-        // cek dan update staus dari subtask
-        if (data.task) {
-            updateTaskStatus(data.task.id, data.task.is_complete);
-        }
-    } catch (error) {
-        alert(error.message);
+    if (!title) {
+        showAlert("error", "Judul tidak boleh kosong");
+        return;
     }
+    fetch(`/mytasks/${taskId}/subtask`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]')
+                .content,
+        },
+        body: JSON.stringify({ title: title }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.subtask) {
+                // menyisipkan subtask baru tanpa refresh
+                document
+                    .getElementById("subtasks-container")
+                    .insertAdjacentHTML("beforeend", data.html);
+
+                // kosongkan kolong input subtask
+                document.getElementById("subtask-title").value = "";
+            } else {
+                showAlert("error", "gagal menambahkan subtask");
+            }
+        })
+        .catch((error) => showAlert("error", error.message));
 }
-// fungsi untuk mengganti status toggle
+
+// fungsi untuk mengganti status toggle subtask
 async function handleToggleSubtask(event) {
     const subtaskElement = event.target.closest(".subtask-card");
+    // id diambil dari subtask.blade
     const subtaskId = subtaskElement.dataset.id;
 
     try {
-        const response = await fetch(`/subtask/${subtaskId}`, {
+        const response = await fetch(`/subtasks/${subtaskId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -182,23 +249,22 @@ async function handleToggleSubtask(event) {
 
         if (!response.ok) throw new Error("Failed update the subtask");
 
-        const data = await response.json();
-        subtaskElement.outerHTML = renderSubtask({
-            id: subtaskId,
-            title: subtaskElement.querySelector("p").textContent,
-            is_complete: data.is_complete,
-        });
+        // const data = await response.json();
 
-        if (data.task) {
-            updateTaskStatus(data.task.id, data.task.is_complete);
-        }
+        // ambil ulang html dari server setelah update
+        const newSubtaskHtml = await fetch(`/mytasks/${subtaskId}/html`);
+        const newHtml = await newSubtaskHtml.text();
+
+        // ganti elemen lama dengan html baru
+        subtaskElement.outerHTML = newHtml;
     } catch (error) {
-        alert(error.massage);
+        showAlert("error", error.message);
     }
 }
 // fungsi untuk hapus subtask
 async function handleDeleteSubtask(event) {
     const subtaskElement = event.target.closest(".subtask-card");
+    // id diambil dari subtask.blade
     const subtaskId = subtaskElement.dataset.id;
 
     try {
@@ -212,51 +278,12 @@ async function handleDeleteSubtask(event) {
         });
 
         if (!response.ok) throw new Error("Failed to delete the subtask");
-
-        const data = await response.json();
         subtaskElement.remove();
-
-        // update parent status
-        if (data.task) {
-            updateTaskStatus(data.task.id, data.task.is_complete);
-        }
-        // if (!document.querySelector("#subtasks-container").children.length) {
-        //     document.getElementById(
-        //         "subtasks-container"
-        //     ).innerHTML = `<p class="text-white bg-black text-center">Tidak ada subtask. function delete</p>`;
-        // }
     } catch (error) {
-        alert(error.message);
+        showAlert("error", error.message);
     }
-}
-// fungsi sebagai template dari subtask
-function renderSubtask(subtask) {
-    return `
-        <div class="subtask-card flex justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)]" data-id="${
-            subtask.id
-        }">
-            <div class="flex">
-                <button class="toggle-complete flex items-center">
-                    ${
-                        subtask.is_complete
-                            ? '<i class="text-xl fa-regular fa-circle-check"></i>'
-                            : '<i class="text-xl fa-regular fa-circle"></i>'
-                    }
-                </button>
-                <p class="mx-2 font-medium capitalize ${
-                    subtask.is_complete ? "line-through text-gray-600" : ""
-                }">
-                    ${subtask.title}</p>
-            </div>
-            <div class="flex">
-                <div class="flex h-full">
-                    <button class="delete-subtask flex h-full items-center">
-                        <i class="fa-regular fa-circle-xmark text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
 }
 
 window.showDetailTask = showDetailTask;
+window.showEditTask = showEditTask;
+window.updateTask = updateTask;

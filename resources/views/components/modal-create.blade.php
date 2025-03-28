@@ -1,5 +1,5 @@
 <div id="crud-modal" tabindex="-1" aria-hidden="true"
-    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 bottom-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg border-2 border-black shadow-[0_8px_0_0_rgba(0,0,0,1)]">
@@ -25,9 +25,9 @@
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">
                         <label for="title" class="block mb-2 text-base font-medium text-black">Title</label>
-                        <input type="text" name="title" id="title"
+                        <input type="text" name="title" id="title" maxlength="25"
                             class="bg-white border-2 border-black text-black text-sm font-medium  rounded-lg outline-none block w-full p-2.5"
-                            required="">
+                            required>
                     </div>
                     <div class="col-span-2">
                         <label for="description" class="block mb-2 text-base font-medium text-black">Description</label>
@@ -35,12 +35,12 @@
                             class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"></textarea>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="deadline" class="block mb-2 text-base font-medium text-black">Due
-                            Date</label>
+                        <label for="deadline" class="block mb-2 text-base font-medium text-black">Deadline</label>
 
                         <div class="relative max-w-sm">
                             <input id="deadline" type="date" name="deadline"
-                                class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5">
+                                class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"
+                                required>
                         </div>
 
                     </div>

@@ -5,10 +5,36 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    .btn-neo {
-        @apply p-2 rounded-lg text-black border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-300 transition-all border-2;
-    }
+.container-pattern {
+    width: 100%;
+    height: 100%;
+    --color: #e1e1e1;
+    background-color: #f3f3f3;
+    background-image: linear-gradient(
+            0deg,
+            transparent 24%,
+            var(--color) 25%,
+            var(--color) 26%,
+            transparent 27%,
+            transparent 74%,
+            var(--color) 75%,
+            var(--color) 76%,
+            transparent 77%,
+            transparent
+        ),
+        linear-gradient(
+            90deg,
+            transparent 24%,
+            var(--color) 25%,
+            var(--color) 26%,
+            transparent 27%,
+            transparent 74%,
+            var(--color) 75%,
+            var(--color) 76%,
+            transparent 77%,
+            transparent
+        );
+    background-size: 55px 55px;
 }
 
 .custom-swal-popup {

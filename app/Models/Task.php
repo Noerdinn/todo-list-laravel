@@ -9,6 +9,7 @@ class Task extends Model
 {
     use HasFactory;
     protected $table = 'tasks';
+    protected $dates = ['complete_at'];
 
     protected $fillable = [
         'user_id',
@@ -17,7 +18,7 @@ class Task extends Model
         'deadline',
         'category',
         'priority',
-        'status',
+        'complete_at',
     ];
 
     // relasi ke table user

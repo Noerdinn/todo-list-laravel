@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('deadline')->nullable();
             $table->boolean('is_complete')->default(false);
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
+            $table->date('complete_at')->nullable();
             $table->timestamps();
         });
     }

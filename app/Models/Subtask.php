@@ -18,6 +18,8 @@ class Subtask extends Model
         'is_complete' => 'boolean'
     ];
 
+    public $timestamps = false;
+
     // relasi ke table tasks
     public function task()
     {

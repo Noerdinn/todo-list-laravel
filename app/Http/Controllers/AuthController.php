@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    // halaman home
     public function showHome()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -28,10 +29,11 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        //logika untuk tugas selesai atau belum
         // $completeTask = Task::where('user_id', $user->id)->where('is_complete', true)->count();
+        //logika untuk menghitung tugas yang sudah selesai
         $completeTask = $user->tasks()->where('is_complete', true)->count();
-        $incompleteTasks = $user->tasks()->where('is_complete', false)->count();
+        // logika untuk menghitung total jumlah task
+        $incompleteTasks = $user->tasks()->count();
 
         $date = date('l, d F Y'); // Format tanggal: Senin, 01 Januari 2025
 
@@ -47,7 +49,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:4',
+            'password' => 'required|min:6',
         ]);
 
         // jika tidak valid tampilkan error
@@ -77,6 +79,7 @@ class AuthController extends Controller
         return view('login');
     }
 
+    // validasi login
     public function autenticate(Request $request): RedirectResponse
     {
 
@@ -86,16 +89,20 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-
-            return redirect()->route('home.page');
-        } else {
-            return redirect()->back()->with(
-                'email',
-                'Email atau password salah.',
-            );
+            return redirect()->route('home.page')->with('success', 'Berhasil login!');
         }
+
+        // jika tidak ada
+        $userExist = User::where('email', $request->email)->exists();
+
+        return back()->withInput()->with([
+            $userExist ? 'password' : 'email' => $userExist
+                ? 'Password yang anda masukkan salah.'
+                : 'Email yang anda masukkan salah.'
+        ]);
     }
 
+    // untuk logout
     function logout()
     {
         Auth::logout();
