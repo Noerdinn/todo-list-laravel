@@ -11,7 +11,7 @@
                     <div class="md:col-span-4">
                         <!-- Modal toggle -->
                         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                            class="block p-2 rounded-xl border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] transition-all border-2 font-medium md:text-base text-sm w-full text-black bg-[#8BB696]"
+                            class="block p-2 rounded-xl border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[4px] hover:shadow-none transition-all border-2 font-medium md:text-base text-sm w-full text-white bg-[#3A66B1] hover:bg-[#224E7D]"
                             type="button">
                             Create Task
                         </button>
@@ -41,7 +41,7 @@
                         <div data-task-id="{{ $task->id }}" onclick="showDetailTask({{ $task->id }})"
                             class="task-item flex
                             justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black transition-all 
-                            shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] overflow-x-hidden hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:bg-[#f0f0f0] cursor-pointer">
+                            shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] overflow-x-hidden hover:shadow-none hover:translate-y-[4px] hover:bg-[#e1e3e5] cursor-pointer">
                             <div class="flex">
 
                                 {{-- update is_complete selesai atau tidak selesai menggunakan ajax --}}
@@ -57,7 +57,7 @@
 
                                 {{-- title task --}}
                                 <div class="flex ">
-                                    <p class="title-task mx-3 md:text-base text-sm self-center font-medium duration-1000 capitalize transition-transform {{ $task->is_complete ? 'line-through  text-gray-500' : '' }}"
+                                    <p class="title-task mx-3 md:text-base text-sm self-center font-medium duration-1000 capitalize transition-transform {{ $task->is_complete ? 'line-through' : '' }}"
                                         data-task-id="{{ $task->id }}">
                                         {{ $task->title }}</p>
                                 </div>
@@ -81,19 +81,19 @@
                                         class=" {{ $task->priority === 'high' ? 'fa-solid fa-thumbtack md:text-lg text-sm' : '' }}"></i> --}}
                                     @if ($task->priority === 'high')
                                         <span
-                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-red-400 text-white">High</span>
+                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E53123] text-white">High</span>
                                     @elseif ($task->priority === 'medium')
                                         <span
-                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-yellow-200">Medium</span>
+                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#efce31]">Medium</span>
                                     @elseif ($task->priority === 'low')
                                         <span
-                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-blue-300 ">Low</span>
+                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black text-white bg-[#3C6CCE]">Low</span>
                                     @endif
                                 </div>
                                 <div id="successLable" data-lable-id="{{ $task->id }}"
                                     class="flex items-center ms-1.5 {{ $task->is_complete ? '' : 'hidden' }}">
                                     <span
-                                        class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-green-200">Success</span>
+                                        class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#50c881]">Success</span>
                                 </div>
                             </div>{{-- hapus task --}}
                             {{-- <div class="flex"> 

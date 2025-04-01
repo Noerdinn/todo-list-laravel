@@ -3,13 +3,13 @@
         <h1 id="task-title" class="md:text-3xl text-xl font-semibold capitalize">{{ $task->title }}</h1>
         @if ($task->priority === 'high')
             <span
-                class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center bg-red-400">High</span>
+                class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center text-white bg-[#E53123]">High</span>
         @elseif ($task->priority === 'medium')
             <span
-                class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center bg-yellow-200">Medium</span>
+                class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center bg-[#efce31]">Medium</span>
         @elseif ($task->priority === 'low')
             <span
-                class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center bg-blue-300">Low</span>
+                class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center text-white bg-[#3C6CCE]">Low</span>
         @endif
     </div>
     <div class="mb-6">
@@ -20,7 +20,7 @@
             {{-- trigger complete task --}}
             <div>
                 <button onclick="toggleTaskStatus({{ $task->id }})" id="mark-complete-btn"
-                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all bg-white"
+                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all bg-[#50c881]"
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
@@ -32,7 +32,7 @@
             {{-- trigger delete task --}}
             <div>
                 <button
-                    class="delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all "
+                    class="delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all bg-[#E53123] text-white"
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
@@ -50,7 +50,7 @@
             {{-- trigger edit task --}}
             <div>
                 <button onclick="showEditTask({{ $task->id }})"
-                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all "
+                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all text-white bg-[#3C6CCE]"
                     {{ $task->is_complete ? 'disabled' : '' }}>
                     <div class="block md:hidden">
                     </div>
@@ -83,6 +83,7 @@
         <input type="text" id="subtask-title"
             class="md:text-base text-sm border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
             placeholder="Add new subtask">
-        <button id="add-subtask-btn" class="md:text-base text-sm bg-black text-white p-2 px-4 rounded-lg">+Add</button>
+        <button id="add-subtask-btn"
+            class="md:text-base text-sm shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all mb-1.5 border-black border-2 text-white bg-[#3C6CCE] p-2 px-4 rounded-lg">+Add</button>
     </div>
 </div>

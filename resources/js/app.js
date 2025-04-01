@@ -43,11 +43,11 @@ async function showDetailTask(taskId = null) {
 
         // Update task list styling
         document.querySelectorAll(".task-item").forEach((item) => {
-            item.classList.add("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
-            item.classList.remove("bg-[#f0f0f0]", "translate-y-[3px]");
+            item.classList.add("shadow-[0px_4px_0px_0px_rgba(0,0,0,1)]");
+            item.classList.remove("bg-[#e1e3e5]", "translate-y-[4px]");
             if (item.dataset.taskId === taskId.toString()) {
-                item.classList.add("bg-[#f0f0f0]", "translate-y-[3px]");
-                item.classList.remove("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
+                item.classList.add("bg-[#e1e3e5]", "translate-y-[4px]");
+                item.classList.remove("shadow-[0px_4px_0px_0px_rgba(0,0,0,1)]");
             }
         });
     } catch (error) {
@@ -81,12 +81,12 @@ window.toggleTaskStatus = function (taskId) {
                 );
                 const itemList = taskItem.querySelector(".title-task");
                 if (data.is_complete) {
-                    itemList.classList.add("line-through", "text-gray-500");
+                    itemList.classList.add("line-through");
                     toggleIcon.classList.add("fa-circle-check");
                     toggleIcon.classList.remove("fa-circle");
                     successLable.classList.remove("hidden");
                 } else {
-                    itemList.classList.remove("line-through", "text-gray-500");
+                    itemList.classList.remove("line-through");
                     toggleIcon.classList.remove("fa-circle-check");
                     toggleIcon.classList.add("fa-circle");
                     successLable.classList.add("hidden");
