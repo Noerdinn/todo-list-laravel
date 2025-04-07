@@ -5,6 +5,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @vite('resources/css/app.css')
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/img/site.webmanifest">
+
+    <title>Welcome to Neo List</title>
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -14,7 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
 </head>
 
-<body class="h-screen font-MadeforDisplay">
+<body class="h-dvh font-MadeforDisplay">
 
     <div class="h-full grid grid-cols-5 gap-8 md:grid-rows-1 grid-rows-2 md:items-center px-8 ">
 
@@ -34,7 +42,12 @@
                 <a href="home"
                     class="rounded-lg p-2 px-10 text-black border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] transition-all border-2 font-medium capitalize">Get
                     Started</a>
+                <a href="https://github.com/Noerdinn/todo-list-laravel" target="_blank">
+                    <i
+                        class="fa-brands fa-github text-black text-5xl translate-y-[3px] hover:text-[#efce31] transition-all ease-in-out duration-700"></i>
+                </a>
             </div>
+
         </div>
 
         <div class="md:col-span-3 col-span-full flex md:justify-end justify-center ">

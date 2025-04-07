@@ -4,7 +4,7 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg border-2 border-black shadow-[0_8px_0_0_rgba(0,0,0,1)]">
             <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t  border-black">
+            <div class="flex items-center justify-between md:py-6 py-4 px-6 border-b rounded-t  border-black">
                 <h3 class="text-xl font-semibold text-black">
                     Create New Task
                 </h3>
@@ -20,35 +20,36 @@
                 </button>
             </div>
             <!-- Modal body untuk create task -->
-            <form class="p-4 md:p-5" action="{{ route('mytasks.store') }}" method="POST">
+            <form class="md:py-6 py-4 px-6" action="{{ route('mytasks.store') }}" method="POST">
                 @csrf
-                <div class="grid gap-4 mb-4 grid-cols-2">
+                <div class="grid gap-2 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="title" class="block mb-2 text-base font-medium text-black">Title</label>
-                        <input type="text" name="title" id="title" maxlength="25"
-                            class="bg-white border-2 border-black text-black text-sm font-medium  rounded-lg outline-none block w-full p-2.5"
+                        <label for="title"
+                            class="block md:text-base text-base font-semibold text-black">Title</label>
+                        <input type="text" name="title" id="title" maxlength="50"
+                            class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium  rounded-lg outline-none block w-full md:p-2.5 p-2"
                             required>
                     </div>
                     <div class="col-span-2">
-                        <label for="description" class="block mb-2 text-base font-medium text-black">Description</label>
-                        <textarea name="description" type="text" id="description" rows="3"
-                            class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"></textarea>
+                        <label for="description" class="block text-base font-semibold text-black">Description</label>
+                        <textarea name="description" type="text" id="description" rows="2"
+                            class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full md:p-2.5 p-2"></textarea>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="deadline" class="block mb-2 text-base font-medium text-black">Deadline</label>
+                        <label for="deadline" class="block text-base font-semibold text-black">Deadline</label>
 
                         <div class="relative max-w-sm">
                             <input id="deadline" type="date" name="deadline"
-                                class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5"
+                                class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full md:p-2.5 p-2"
                                 required>
                         </div>
 
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="priority" class="block mb-2 text-base font-medium text-black">Select
+                        <label for="priority" class="block text-base font-semibold text-black">Select
                             Priority</label>
                         <select id="priority" name="priority"
-                            class="bg-white border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full p-2.5">
+                            class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full md:p-2.5 p-2">
                             {{-- <option selected>Skala Prioritas</option> --}}
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
@@ -57,13 +58,7 @@
                     </div>
                 </div>
                 <button type="submit"
-                    class="flex w-full text-center justify-center p-2 rounded-lg text-black border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-300 transition-all border-2 mb-5 mt-6 font-medium">
-                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
+                    class="flex w-full text-center justify-center p-2 rounded-lg text-white border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none hover:bg-[#3A66B1] bg-[#3085d6] transition-all border-2 mb-5 mt-6 font-medium">
                     Add Task
                 </button>
             </form>

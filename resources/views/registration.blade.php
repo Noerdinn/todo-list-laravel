@@ -17,59 +17,90 @@
 </head>
 
 <body class="h-full font-MadeforDisplay">
+    {{-- loading screen --}}
+    <div id="loading-screen"
+        class="loading-neo fixed h-full inset-0 z-50 items-center justify-center bg-black/25 backdrop-blur-sm transition-opacity opacity-100">
+        <div class="flex h-full items-center justify-center gap-2 md:gap-3">
+
+            <div
+                class="md:w-20 md:h-20 w-14 h-14 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] animate-bounce delay-[100ms]">
+                <p class="flex h-full items-center justify-center font-MadeforDisplay font-black md:text-5xl text-3xl">N
+                </p>
+            </div>
+            <div
+                class="md:w-20 md:h-20 w-14 h-14 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] animate-bounce delay-[150ms]">
+                <p class="flex h-full items-center justify-center font-MadeforDisplay font-black md:text-5xl text-3xl">E
+                </p>
+            </div>
+            <div
+                class="md:w-20 md:h-20 w-14 h-14 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] animate-bounce delay-[200ms]">
+                <p class="flex h-full items-center justify-center font-MadeforDisplay font-black md:text-5xl text-3xl">O
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="grid grid-rows-1 grid-cols-3 gap-4 min-h-full max-h-screen justify-center px-6 py-12 lg:px-8">
         <div
-            class="flex md:col-span-1 col-span-full md:h-full h-fit py-10 md:py-0 self-center items-center border-2 border-black px-6 rounded-lg shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
+            class="flex md:col-span-1 col-span-full md:h-full h-fit py-10 md:py-0 self-center items-center lg:border-2 border-0 border-black px-6 rounded-lg lg:shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] shadow-none">
             <div class="container">
+                <div class="w-full">
+                    <img class="h-14 2xl:h-20 mx-auto mb-4" src="{{ asset('img/Neo List icon.png') }}" alt="">
+                </div>
+
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 class="text-center text-4xl font-bold tracking-tight text-black">Registration</h2>
+                    <h2 class="text-center text-3xl lg:text-2xl 2xl:text-4xl font-bold tracking-tight text-black mb-2">
+                        Welcome Back!
+                    </h2>
+                    <p class="text-center lg:text-sm 2xl:text-lg">Buat akun dan kelola semua tugasmu dengan lebih
+                        mudah.</p>
                 </div>
 
                 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form class="space-y-3" action="{{ route('registration.submit') }}" method="POST">
+                    <form class="space-y-4" action="{{ route('registration.submit') }}" method="POST">
                         @csrf
                         <div>
-                            <label for="name" class="block text-lg font-medium text-black">Name</label>
+                            {{-- <label for="name" class="block text-lg font-medium text-black">Name</label> --}}
                             @error('name')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                             <div class="mt-2">
                                 <input type="name" name="name" id="name" autocomplete="name" required
-                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none"
-                                    value="{{ old('name') }}">
+                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
+                                    placeholder="Name" value="{{ old('name') }}">
                             </div>
                         </div>
                         <div>
-                            <label for="email" class="block text-lg font-medium text-black">Email
-                                address</label>
+                            {{-- <label for="email" class="block text-lg font-medium text-black">Email
+                                address</label> --}}
                             @error('email')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                             <div class="mt-2">
                                 <input type="email" name="email" id="email" autocomplete="email" required
-                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none"
-                                    value="{{ old('email') }}">
+                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
+                                    placeholder="Email" value="{{ old('email') }}">
                             </div>
                         </div>
 
                         <div>
-                            <div class="flex items-center justify-between">
+                            {{-- <div class="flex items-center justify-between">
                                 <label for="password" class="block text-lg font-medium text-black">Password</label>
-                            </div>
+                            </div> --}}
                             @error('password')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                             <div class="mt-2">
                                 <input type="password" name="password" id="password" autocomplete="current-password"
                                     required
-                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none"
-                                    value="{{ old('password') }}">
+                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
+                                    placeholder="Password" value="{{ old('password') }}">
                             </div>
                         </div>
 
                         <div>
                             <button type="submit"
-                                class="w-full font-medium font-MadeforDisplay text-xl items-center p-2 rounded-lg text-black border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] transition-all border-2 text-center mt-6">Register</button>
+                                class="w-full font-medium font-MadeforDisplay text-xl items-center p-2 rounded-lg text-black border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] transition-all border-2 text-center mt-6 bg-[#efce31]">Register</button>
                         </div>
                     </form>
 
@@ -87,6 +118,8 @@
             </div>
         </div>
     </div>
+
+    @vite('resources/js/app.js')
 </body>
 
 </html>

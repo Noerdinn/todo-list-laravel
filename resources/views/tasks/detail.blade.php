@@ -1,4 +1,4 @@
-<div class="flex-grow-1 p-7">
+<div class="flex-grow-1 p-5">
     <div class="flex mb-1 mt-1 gap-2">
         <h1 id="task-title" class="md:text-3xl text-xl font-semibold capitalize">{{ $task->title }}</h1>
         @if ($task->priority === 'high')
@@ -12,15 +12,21 @@
                 class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center text-white bg-[#3C6CCE]">Low</span>
         @endif
     </div>
-    <div class="mb-6">
-        <p class="text-gray-700 font-normal">Deadline {{ \Carbon\Carbon::parse($task->deadline)->format('d F Y') }}</p>
+    <div class="md:text-base text-sm text-gray-700 font-normal mb-6 flex">
+        <p class="md:text-base text-sm text-gray-700 font-normal">Deadline
+            {{ \Carbon\Carbon::parse($task->deadline)->format('d F Y') }}
+        </p>
+        <p class="mx-2">
+            |
+        </p>
+        <p class="status-lable-task">{{ $task->is_complete ? 'Complete' : 'Incomplete' }}</p>
     </div>
     <div class="flex justify-between mb-4">
         <div class="flex gap-1.5">
             {{-- trigger complete task --}}
             <div>
                 <button onclick="toggleTaskStatus({{ $task->id }})" id="mark-complete-btn"
-                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all bg-[#50c881]"
+                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out bg-[#4A9F93] text-white"
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
@@ -32,7 +38,7 @@
             {{-- trigger delete task --}}
             <div>
                 <button
-                    class="delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all bg-[#E53123] text-white"
+                    class="delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out bg-[#E53123] text-white"
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
@@ -49,9 +55,8 @@
 
             {{-- trigger edit task --}}
             <div>
-                <button onclick="showEditTask({{ $task->id }})"
-                    class="py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all text-white bg-[#3C6CCE]"
-                    {{ $task->is_complete ? 'disabled' : '' }}>
+                <button onclick="showEditTask({{ $task->id }})" data-edit-id="{{ $task->id }}"
+                    class="edit-button py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out text-white bg-[#3C6CCE] {{ $task->is_complete ? 'hidden' : '' }}">
                     <div class="block md:hidden">
                     </div>
                     <i class="fa-regular fa-pen-to-square "></i>
@@ -63,16 +68,20 @@
     </div>
     <div class="mt-4">
         <p class="md:text-lg text-base font-medium mb-2">Description</p>
-        <p id="task-desc" class="md:text-base text-sm text-gray-700 font-normal ">{{ $task->description }}</p>
+        <p id="task-desc" class="md:text-base text-sm text-gray-700 font-normal">{{ $task->description }}</p>
     </div>
 
     {{-- menampilkan subtask --}}
     <div class="mt-4 ">
         <p class="md:text-lg text-base font-medium mb-2">Subtasks</p>
-        <div id="subtasks-container">
-            @foreach ($task->subtasks as $subtask)
+        <div id="subtasks-container" class="border-2 border-black rounded-lg p-4 min-h-32 bg-[#e1e3e5] pb-0">
+            @forelse ($task->subtasks as $subtask)
                 @include('tasks.subtask', ['subtask' => $subtask])
-            @endforeach
+            @empty
+                {{-- <div class="empty-subtask-state transition-all bg-black/60">
+                    <p class="text-white text-center py-1">Subtask Masih Kosong</p>
+                </div> --}}
+            @endforelse
         </div>
     </div>
 
@@ -84,6 +93,6 @@
             class="md:text-base text-sm border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
             placeholder="Add new subtask">
         <button id="add-subtask-btn"
-            class="md:text-base text-sm shadow-[0px_5px_0px_0px_rgba(0,0,0,1)] hover:translate-y-1.5 hover:shadow-none transition-all mb-1.5 border-black border-2 text-white bg-[#3C6CCE] p-2 px-4 rounded-lg">+Add</button>
+            class="md:text-base text-sm shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all mb-1 border-black border-2 text-white bg-[#3C6CCE] p-2 px-4 rounded-lg">+Add</button>
     </div>
 </div>

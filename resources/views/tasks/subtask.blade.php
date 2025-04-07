@@ -1,5 +1,5 @@
 <div id="subtask-card"
-    class="subtask-card flex justify-between py-2 px-4 mb-5 border-2 rounded-lg border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)]"
+    class="subtask-card bg-white flex justify-between py-2 px-3 md:px-4 mb-3 md:mb-4 border-2 rounded-lg border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]"
     data-id="{{ $subtask->id }}">
 
     <div class="flex">
@@ -11,7 +11,7 @@
             @endif
         </button>
         <p
-            class="md:mx-2 mx-1 font-medium capitalize md:text-base text-sm {{ $subtask->is_complete == 1 ? 'line-through text-gray-600' : '' }}">
+            class="md:ms-3 ms-1 font-medium capitalize md:text-base text-sm {{ $subtask->is_complete == 1 ? 'line-through text-gray-600' : '' }}">
             {{ $subtask->title }}</p>
     </div>
     <div class="flex">

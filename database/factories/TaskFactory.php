@@ -19,7 +19,7 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => 1,
+            'user_id' => 3,
             'title' => fake()->sentence(4),
             'description' => fake()->text(),
             'deadline' => now(),

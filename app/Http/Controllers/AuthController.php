@@ -29,7 +29,6 @@ class AuthController extends Controller
 
         $user = Auth::user();
 
-        // $completeTask = Task::where('user_id', $user->id)->where('is_complete', true)->count();
         //logika untuk menghitung tugas yang sudah selesai
         $completeTask = $user->tasks()->where('is_complete', true)->count();
         // logika untuk menghitung total jumlah task

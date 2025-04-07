@@ -13,14 +13,10 @@ class TaskController extends Controller
     // Nampilin konten halaman mytasks
     public function index(Request $request)
     {
-        $tasks = Task::where('user_id', Auth::id())->orderBy('priority', 'desc')->get();
-        // $tasks = Task::where('user_id', Auth::id())->orderByRaw("CASE WHEN priority = 'high' THEN 1 ELSE 2 END")
-        //     ->orderBy('created_at', 'asc')->get();
-
-        // $editTask = null;
-        // if ($request->has('edit')) {
-        //     $editTask = Task::where('id', $request->edit)->where('user_id', Auth::id())->first();
-        // }
+        $tasks = Task::where('user_id', Auth::id())
+            ->orderBy('priority', 'desc')
+            ->orderBy('created_at', 'asc')
+            ->get();
 
         return view('mytasks', compact('tasks'));
     }

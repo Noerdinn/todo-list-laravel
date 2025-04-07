@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonColor: "#3085d6",
                 confirmButtonText: "Yes, log out!",
                 cancelButtonText: "Cancel",
+                scrollbarPadding: "false",
                 customClass: {
                     popup: "custom-swal-popup",
                     title: "custom-swal-title", // Untuk judul

@@ -1,6 +1,20 @@
 import "./bootstrap";
 import "./alert";
 
+// loading screen
+window.addEventListener("load", () => {
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+        setTimeout(() => {
+            loadingScreen.classList.add("opacity-0");
+
+            setTimeout(() => {
+                loadingScreen.style.display = "none";
+            }, 500);
+        }, 1000);
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     showDetailTask(null);
 });
@@ -16,14 +30,19 @@ async function showDetailTask(taskId = null) {
 
     // jika task id false atau kosong maka tampilkan ini
     if (!taskId) {
-        taskDetailContainer.innerHTML = `
-        <div class="h-full flex items-center justify-center">
-            <div class="text-center">
-                <i class="fa-solid fa-eye md:text-9xl text-7xl text-gray-400 mb-4"></i>
-                <p class="text-black md:text-lg text-base">Tidak ada task yang dipilih.</p>
-                <p class="text-black md:text-lg text-base">Tekan icon mata pada task yang ingin ditampilkan.</p>
+        taskDetailContainer.innerHTML = `        
+        <div class="flex-1 font-MadeforDisplay flex flex-col items-center h-full justify-center">
+            <div
+                class="md:h-32 md:w-32 h-20 w-20 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] flex items-center justify-center mb-10">
+                <p class="text-6xl md:text-8xl font-black">?</p>
             </div>
-        </div>`;
+                <p class="text-xl md:text-2xl font-bold mb-2">Tidak ada task yang dipilih</p>
+                <div class="flex items-center">
+                    <p class="text-sm md:text-lg font-medium text-black/55 text-center text-balance">Tekan salah satu task untuk melihat detail.
+                    </p>
+            </div>
+        </div>
+        `;
         return;
     }
 
@@ -43,11 +62,11 @@ async function showDetailTask(taskId = null) {
 
         // Update task list styling
         document.querySelectorAll(".task-item").forEach((item) => {
-            item.classList.add("shadow-[0px_4px_0px_0px_rgba(0,0,0,1)]");
-            item.classList.remove("bg-[#e1e3e5]", "translate-y-[4px]");
+            item.classList.add("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
+            item.classList.remove("bg-[#e1e3e5]", "translate-y-[3px]");
             if (item.dataset.taskId === taskId.toString()) {
-                item.classList.add("bg-[#e1e3e5]", "translate-y-[4px]");
-                item.classList.remove("shadow-[0px_4px_0px_0px_rgba(0,0,0,1)]");
+                item.classList.add("bg-[#e1e3e5]", "translate-y-[3px]");
+                item.classList.remove("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
             }
         });
     } catch (error) {
@@ -72,24 +91,38 @@ window.toggleTaskStatus = function (taskId) {
                 const taskItem = document.querySelector(
                     `[data-task-id="${taskId}"]`
                 );
-
+                // icon task check/uncheck
                 const toggleIcon = taskItem.querySelector(
                     ".toggle-task-status"
                 );
-                const successLable = document.querySelector(
-                    `[data-lable-id="${taskId}"]`
-                );
+                // const successLable = document.querySelector(
+                //     `[data-lable-id="${taskId}"]`
+                // );
+
+                // satus is_complete
+                const statusLable =
+                    document.querySelector(".status-lable-task");
+                // title task
                 const itemList = taskItem.querySelector(".title-task");
+                // edit button
+                const editButton = document.querySelector(
+                    `[data-edit-id="${taskId}"]`
+                );
+
                 if (data.is_complete) {
                     itemList.classList.add("line-through");
                     toggleIcon.classList.add("fa-circle-check");
                     toggleIcon.classList.remove("fa-circle");
-                    successLable.classList.remove("hidden");
+                    statusLable.textContent = "Complete";
+                    editButton.classList.add("hidden");
+                    // successLable.classList.remove("hidden");
                 } else {
                     itemList.classList.remove("line-through");
                     toggleIcon.classList.remove("fa-circle-check");
                     toggleIcon.classList.add("fa-circle");
-                    successLable.classList.add("hidden");
+                    statusLable.textContent = "Incomplete";
+                    editButton.classList.remove("hidden");
+                    // successLable.classList.add("hidden");
                 }
             } else {
                 showAlert("error", "Failed to toggle task status.");
@@ -156,7 +189,7 @@ async function showEditTask(taskId) {
 
 // fungsi untuk mensubmit hasil edit
 async function updateTask(event, taskId) {
-    event.preventDefault();
+    // event.preventDefault();
 
     const form = document.getElementById(`edit-task-form-${taskId}`);
     const formData = new FormData(form);
@@ -170,15 +203,15 @@ async function updateTask(event, taskId) {
         if (!response.ok) throw new Error("Gagal mengupdate task.");
 
         // nilai baru dari input
-        const updateTitle = form.querySelector('input[name="title"]').value;
+        // const updateTitle = form.querySelector('input[name="title"]').value;
 
         // perbarui title tanpa refresh
-        const titleElemen = document.querySelector(
-            `.title-task[data-task-id="${taskId}"]`
-        );
-        if (titleElemen) {
-            titleElemen.textContent = updateTitle;
-        }
+        // const titleElemen = document.querySelector(
+        //     `.title-task[data-task-id="${taskId}"]`
+        // );
+        // if (titleElemen) {
+        //     titleElemen.textContent = updateTitle;
+        // }
         showDetailTask(taskId); // Kembali ke tampilan detail setelah update
     } catch (error) {
         console.error(error);
@@ -199,6 +232,13 @@ document.addEventListener("click", async (event) => {
 async function handleAddSubtask() {
     const title = document.getElementById("subtask-title").value.trim();
     const taskId = document.getElementById("current-task-id").value;
+
+    const emptyState = document.querySelector(
+        "#subtasks-container .empty-subtask-state"
+    );
+    if (emptyState) {
+        emptyState.remove();
+    }
 
     if (!title) {
         showAlert("error", "Judul tidak boleh kosong");
