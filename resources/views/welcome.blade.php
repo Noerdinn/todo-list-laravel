@@ -24,6 +24,8 @@
 
 <body class="h-dvh font-MadeforDisplay">
 
+    <x-bounce-time></x-bounce-time>
+
     <div class="h-full grid grid-cols-5 gap-8 md:grid-rows-1 grid-rows-2 md:items-center px-8 ">
 
         <div class="md:col-span-2 col-span-full self-end md:self-center">
@@ -61,7 +63,7 @@
             </div>
         </div>
     </div>
-
+    @vite('resources/js/app.js')
 </body>
 
 </html>

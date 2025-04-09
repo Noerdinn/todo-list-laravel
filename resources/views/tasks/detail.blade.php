@@ -1,7 +1,8 @@
 <div class="flex-grow-1 p-5">
-    <div class="flex mb-1 mt-1 gap-2">
-        <h1 id="task-title" class="md:text-3xl text-xl font-semibold capitalize">{{ $task->title }}</h1>
-        @if ($task->priority === 'high')
+    <div class="flex flex-col md:flex-row mb-1 mt-1 gap-2">
+        {{-- title --}}
+        <h1 id="task-title" class="md:text-3xl text-base font-semibold capitalize">{{ $task->title }}</h1>
+        {{-- @if ($task->priority === 'high')
             <span
                 class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center text-white bg-[#E53123]">High</span>
         @elseif ($task->priority === 'medium')
@@ -10,16 +11,23 @@
         @elseif ($task->priority === 'low')
             <span
                 class="py-1 px-2 md:text-base text-xs rounded-[5px] border-2 border-black h-fit self-center text-white bg-[#3C6CCE]">Low</span>
-        @endif
+        @endif --}}
     </div>
-    <div class="md:text-base text-sm text-gray-700 font-normal mb-6 flex">
-        <p class="md:text-base text-sm text-gray-700 font-normal">Deadline
+    <div class="mt-2 mb-6 flex items-center md:text-base text-sm text-gray-700 font-normal divide-x-2 divide-gray-700">
+        {{-- deadline --}}
+        <p class="pe-1 md:pe-3">Deadline
             {{ \Carbon\Carbon::parse($task->deadline)->format('d F Y') }}
         </p>
-        <p class="mx-2">
-            |
-        </p>
-        <p class="status-lable-task">{{ $task->is_complete ? 'Complete' : 'Incomplete' }}</p>
+        {{-- status --}}
+        <p class="status-lable-task px-1 md:px-3">{{ $task->is_complete ? 'Complete' : 'Incomplete' }}</p>
+        {{-- priority --}}
+        @if ($task->priority === 'high')
+            <span class="ps-1 md:ps-3">High</span>
+        @elseif ($task->priority === 'medium')
+            <span class="ps-1 md:ps-3">Medium</span>
+        @elseif ($task->priority === 'low')
+            <span class="ps-1 md:ps-3">Low</span>
+        @endif
     </div>
     <div class="flex justify-between mb-4">
         <div class="flex gap-1.5">

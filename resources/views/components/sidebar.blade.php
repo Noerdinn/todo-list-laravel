@@ -14,7 +14,7 @@
 
                 <li>
                     <a href="{{ route('home.page') }}"
-                        class="flex items-center py-2 px-4 rounded-xl text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'home.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
+                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'home.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
                         <i class="fa-solid fa-house"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">Home</span>
                     </a>
@@ -22,7 +22,7 @@
 
                 <li>
                     <a href="{{ route('mytasks.page') }}"
-                        class="flex items-center py-2 px-4 rounded-xl text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'mytasks.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
+                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'mytasks.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
                         <i class="fa-solid fa-list-check"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">My Tasks</span>
                         <span {{-- jika ada tugas maka tampilkan indikator bulat --}}
@@ -32,7 +32,7 @@
 
                 <li>
                     <a href="{{ route('history.page') }}"
-                        class="flex items-center py-2 px-4 rounded-xl text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'history.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
+                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'history.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
                         <i class="fa-regular fa-clock"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">History</span>
                     </a>
@@ -47,7 +47,8 @@
                             <img class="w-25 h-20 m-auto border-black border-2 rounded-full"
                                 src="{{ asset('img/Profile-img-b.png') }}" alt="user photo">
                         </div>
-                        <p class="text-sm capitalize">{{ $user->name }}</p>
+                        <p class="text-sm capitalize truncate" title="{{ $user->name }}">
+                            {{ $user->name }}</p>
                         <p class="text-sm ">{{ $user->email }}</p>
                         <button id="logout-btn"
                             class="flex w-full items-center py-2 justify-center rounded-xl text-white border-black transition-all border-2 my-3 bg-[#E53123] hover:bg-[#CA2B24] hover:translate-y-[3px] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]">

@@ -11,7 +11,7 @@
                     <div class="md:col-span-4">
                         <!-- Modal toggle -->
                         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                            class="block p-2 rounded-xl border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all border-2 font-medium md:text-base text-sm w-full text-white hover:bg-[#3A66B1] bg-[#3085d6]"
+                            class="block p-2 rounded-lg border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all border-2 font-medium md:text-base text-sm w-full text-white hover:bg-[#3A66B1] bg-[#3085d6]"
                             type="button">
                             Create Task
                         </button>
@@ -41,7 +41,7 @@
                             class="task-item flex
                                 justify-between py-2 px-3 md:px-4 mb-3 md:mb-4 border-2 rounded-lg border-black transition-all ease-out 
                                 shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] overflow-x-hidden hover:shadow-none hover:translate-y-[3px] hover:bg-[#e1e3e5] cursor-pointer">
-                            <div class="flex">
+                            <div class="flex justify-between items-center w-full">
 
                                 {{-- update is_complete selesai atau tidak selesai menggunakan ajax --}}
 
@@ -50,37 +50,35 @@
                                         class="toggle-task-status md:text-xl text-sm {{ $task->is_complete ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle' }}"></i>
                                 </button> --}}
 
+                                <div class="flex">
+                                    {{-- icon status --}}
+                                    <div class="flex items-center">
+                                        <i
+                                            class="toggle-task-status md:text-xl text-sm {{ $task->is_complete ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle' }}"></i>
+                                    </div>
 
-                                <div class="flex items-center">
-                                    <i
-                                        class="toggle-task-status md:text-xl text-sm {{ $task->is_complete ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle' }}"></i>
+                                    {{-- title task --}}
+                                    <div class="flex ">
+                                        <p class="title-task mx-2 md:mx-3 md:text-base text-sm self-center font-medium duration-1000 capitalize transition-transform   {{ $task->is_complete ? 'line-through' : '' }}"
+                                            data-task-id="{{ $task->id }}">
+                                            {{ $task->title }}</p>
+                                    </div>
                                 </div>
-
-                                {{-- title task --}}
-                                <div class="flex ">
-                                    <p class="title-task mx-2 md:mx-3 md:text-base text-sm self-center font-medium duration-1000 capitalize transition-transform {{ $task->is_complete ? 'line-through' : '' }}"
-                                        data-task-id="{{ $task->id }}">
-                                        {{ $task->title }}</p>
+                                <div>
+                                    {{-- indikator prioritas --}}
+                                    <div class="flex items-center">
+                                        @if ($task->priority === 'high')
+                                            <span
+                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E53123] text-white">High</span>
+                                        @elseif ($task->priority === 'medium')
+                                            <span
+                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#efce31]">Medium</span>
+                                        @elseif ($task->priority === 'low')
+                                            <span
+                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black text-white bg-[#3C6CCE]">Low</span>
+                                        @endif
+                                    </div>
                                 </div>
-
-                                {{-- indikator prioritas --}}
-                                <div class="flex items-center ms-1.5">
-                                    @if ($task->priority === 'high')
-                                        <span
-                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E53123] text-white">High</span>
-                                    @elseif ($task->priority === 'medium')
-                                        <span
-                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#efce31]">Medium</span>
-                                    @elseif ($task->priority === 'low')
-                                        <span
-                                            class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black text-white bg-[#3C6CCE]">Low</span>
-                                    @endif
-                                </div>
-                                {{-- <div id="successLable" data-lable-id="{{ $task->id }}"
-                                                            class="flex items-center ms-1.5 {{ $task->is_complete ? '' : 'hidden' }}">
-                                                            <span
-                                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#50c881]">Success</span>
-                                                        </div> --}}
                             </div>
                         </div>
                     @empty
@@ -92,7 +90,7 @@
                             </div>
                             <p class="text-xl md:text-2xl font-bold mb-2">Task Masih Kosong</p>
                             <div class="flex items-center">
-                                <p class="text-sm md:text-lg font-medium text-black/55 text-center ">Untuk
+                                <p class="text-sm md:text-lg font-medium text-black/55 text-center text-pretty">Untuk
                                     menambah task
                                     baru
                                     tekan tombol Create Task diatas.

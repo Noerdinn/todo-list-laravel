@@ -14,7 +14,7 @@
                 <label for="title" class="block md:text-base text-base font-semibold text-black">Title</label>
                 <input type="text" name="title" id="edit-title"
                     class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium  rounded-lg outline-none block w-full md:p-2.5 p-2"
-                    required maxlength="50" value="{{ $task->title }}">
+                    required value="{{ $task->title }}">
             </div>
 
             <div class="col-span-2">

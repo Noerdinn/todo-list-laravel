@@ -17,32 +17,11 @@
 </head>
 
 <body class="h-full font-MadeforDisplay">
-    {{-- loading screen --}}
-    <div id="loading-screen"
-        class="loading-neo fixed h-full inset-0 z-50 items-center justify-center bg-black/25 backdrop-blur-sm transition-opacity opacity-100">
-        <div class="flex h-full items-center justify-center gap-2 md:gap-3">
-
-            <div
-                class="md:w-20 md:h-20 w-14 h-14 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] animate-bounce delay-[100ms]">
-                <p class="flex h-full items-center justify-center font-MadeforDisplay font-black md:text-5xl text-3xl">N
-                </p>
-            </div>
-            <div
-                class="md:w-20 md:h-20 w-14 h-14 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] animate-bounce delay-[150ms]">
-                <p class="flex h-full items-center justify-center font-MadeforDisplay font-black md:text-5xl text-3xl">E
-                </p>
-            </div>
-            <div
-                class="md:w-20 md:h-20 w-14 h-14 bg-white border-2 border-black rounded-lg shadow-[0_4px_0_0_rgba(0,0,0,1)] animate-bounce delay-[200ms]">
-                <p class="flex h-full items-center justify-center font-MadeforDisplay font-black md:text-5xl text-3xl">O
-                </p>
-            </div>
-        </div>
-    </div>
+    <x-bounce-time></x-bounce-time>
 
     <div class="grid grid-rows-1 grid-cols-3 gap-4 min-h-full max-h-screen justify-center px-6 py-12 lg:px-8">
         <div
-            class="flex md:col-span-1 col-span-full md:h-full h-fit py-10 md:py-0 self-center items-center lg:border-2 border-0 border-black px-6 rounded-lg lg:shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] shadow-none">
+            class="flex md:col-span-1 col-span-full md:h-full h-fit py-10 md:py-0 self-center items-center lg:border-2 border-0 border-black px-6 md:px-10 2xl:px-0 rounded-lg lg:shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] shadow-none">
             <div class="container">
                 <div class="w-full">
                     <img class="h-14 2xl:h-20 mx-auto mb-4" src="{{ asset('img/Neo List icon.png') }}" alt="">
@@ -50,7 +29,7 @@
 
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 class="text-center text-3xl lg:text-2xl 2xl:text-4xl font-bold tracking-tight text-black mb-2">
-                        Welcome Back!
+                        Registration
                     </h2>
                     <p class="text-center lg:text-sm 2xl:text-lg">Buat akun dan kelola semua tugasmu dengan lebih
                         mudah.</p>
