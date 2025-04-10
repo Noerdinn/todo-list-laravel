@@ -15,9 +15,6 @@
                             type="button">
                             Create Task
                         </button>
-
-
-
                     </div>
                     {{-- <div class="md:col-span-8">
                         <x-searchbar></x-searchbar>
@@ -29,7 +26,7 @@
 
 
             <div {{-- konten task --}}
-                class="row-start-2 min-h-[60vh] max-h-[calc(100vh-185px)] md:col-span-1 col-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent scrollbar-thumb-rounded-full p-5 border-2 rounded-lg border-black shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] me-0 mb-0 md:me-2 md:mb-2 bg-white flex flex-col">
+                class="row-start-2 min-h-[60vh] max-h-[calc(100vh-185px)] md:col-span-1 col-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent scrollbar-thumb-rounded-full p-5 border-2 rounded-lg border-black shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] me-0 mb-0 md:me-2 md:mb-2 bg-white flex flex-col ">
                 <div class="flex mb-3">
                     <p class="md:text-xl text-lg font-medium">Task</p>
                 </div>
@@ -62,6 +59,15 @@
                                         <p class="title-task mx-2 md:mx-3 md:text-base text-sm self-center font-medium duration-1000 capitalize transition-transform   {{ $task->is_complete ? 'line-through' : '' }}"
                                             data-task-id="{{ $task->id }}">
                                             {{ $task->title }}</p>
+                                    </div>
+
+                                    {{-- icon clock reminder --}}
+                                    {{-- jika deadline hari ini/besok dan belum selesai --}}
+                                    <div
+                                        class="flex reminder-icon items-center {{ $reminderTask->contains('id', $task->id) && !$task->is_complete ? '' : 'hidden' }}">
+
+                                        <i class="fa-solid fa-stopwatch animate-wiggle text-[#E53123] md:text-xl text-sm"
+                                            title="Deadline dalam 1 hari"></i>
                                     </div>
                                 </div>
                                 <div>

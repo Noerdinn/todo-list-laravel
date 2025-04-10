@@ -11,7 +11,7 @@
             @endif
         </button>
         <p
-            class="md:ms-3 ms-1 font-medium capitalize md:text-base text-sm {{ $subtask->is_complete == 1 ? 'line-through text-gray-600' : '' }}">
+            class="md:ms-3 ms-1 font-medium capitalize md:text-base text-sm {{ $subtask->is_complete == 1 ? 'line-through text-gray-700' : '' }}">
             {{ $subtask->title }}</p>
     </div>
     <div class="flex">

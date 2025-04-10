@@ -75,6 +75,7 @@ async function showDetailTask(taskId = null) {
 }
 // fungsi untuk tombol mengubah status task
 window.toggleTaskStatus = function (taskId) {
+    // location.reload();
     fetch(`/mytasks/${taskId}/toggle`, {
         method: "POST",
         headers: {
@@ -87,43 +88,52 @@ window.toggleTaskStatus = function (taskId) {
         .then((response) => response.json())
         .then((data) => {
             if (data.success) {
-                // location.reload(); // Refresh halaman untuk update tampilan
-                const taskItem = document.querySelector(
-                    `[data-task-id="${taskId}"]`
-                );
+                location.reload(); // Refresh halaman untuk update tampilan
                 // icon task check/uncheck
                 const toggleIcon = taskItem.querySelector(
                     ".toggle-task-status"
                 );
-                // const successLable = document.querySelector(
-                //     `[data-lable-id="${taskId}"]`
-                // );
 
                 // satus is_complete
                 const statusLable =
                     document.querySelector(".status-lable-task");
                 // title task
                 const itemList = taskItem.querySelector(".title-task");
-                // edit button
-                const editButton = document.querySelector(
-                    `[data-edit-id="${taskId}"]`
+                // reminder icon
+                const reminderIcon = document.querySelector(
+                    `[data-reminder-icon="${taskId}"]`
                 );
 
-                if (data.is_complete) {
-                    itemList.classList.add("line-through");
-                    toggleIcon.classList.add("fa-circle-check");
-                    toggleIcon.classList.remove("fa-circle");
-                    statusLable.textContent = "Complete";
-                    editButton.classList.add("hidden");
-                    // successLable.classList.remove("hidden");
-                } else {
-                    itemList.classList.remove("line-through");
-                    toggleIcon.classList.remove("fa-circle-check");
-                    toggleIcon.classList.add("fa-circle");
-                    statusLable.textContent = "Incomplete";
-                    editButton.classList.remove("hidden");
-                    // successLable.classList.add("hidden");
-                }
+                // jika task sudah selesai atau deadline hari ini/besok maka true
+                // if (reminderIcon) {
+                //     if (data.is_complete || !data.is_reminder) {
+                //         reminderIcon.classList.add("hidden");
+                //     } else {
+                //         reminderIcon.classList.remove("hidden");
+                //     }
+                // }
+
+                // if (data.is_complete) {
+                //     itemList.classList.add("line-through");
+                //     toggleIcon.classList.add("fa-circle-check");
+                //     toggleIcon.classList.remove("fa-circle");
+
+                //     statusLable.textContent = "Complete";
+                //     statusLable.classList.remove("bg-red-500");
+                //     statusLable.classList.add("bg-green-700");
+
+                //     editButton.classList.add("hidden");
+                // } else {
+                //     itemList.classList.remove("line-through");
+                //     toggleIcon.classList.remove("fa-circle-check");
+                //     toggleIcon.classList.add("fa-circle");
+
+                //     statusLable.textContent = "Incomplete";
+                //     statusLable.classList.remove("bg-green-700");
+                //     statusLable.classList.add("bg-red-500");
+
+                //     editButton.classList.remove("hidden");
+                // }
             } else {
                 showAlert("error", "Failed to toggle task status.");
             }
@@ -165,6 +175,8 @@ document.addEventListener("click", function (event) {
 
 // Fungsi untuk menampilkan form edit task
 async function showEditTask(taskId) {
+    // event.preventDefault();
+
     const taskDetailContainer = document.getElementById(
         "task-detail-container"
     );

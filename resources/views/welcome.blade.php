@@ -30,10 +30,10 @@
 
         <div class="md:col-span-2 col-span-full self-end md:self-center">
             <h1
-                class="md:text-6xl text-4xl font-medium tracking-tight text-balance text-black md:text-left text-center">
+                class="md:text-6xl text-4xl font-medium tracking-tight text-pretty text-black md:text-left text-center ">
                 Simple,
                 Straight
-                Forward, and Powerfull</h1>
+                Forward, and Powerfull<strong class="text-[#3A66B1]">.</strong></h1>
             <p class="md:mt-8 mt-4 md:text-xl text-base font-medium text-pretty text-black md:text-left text-center">
                 Write it
                 down,
@@ -46,7 +46,7 @@
                     Started</a>
                 <a href="https://github.com/Noerdinn/todo-list-laravel" target="_blank">
                     <i
-                        class="fa-brands fa-github text-black text-5xl translate-y-[3px] hover:text-[#efce31] transition-all ease-in-out duration-700"></i>
+                        class="fa-brands fa-github text-black text-5xl translate-y-[3px] hover:text-[#3A66B1] transition-all ease-in-out duration-700"></i>
                 </a>
             </div>
 

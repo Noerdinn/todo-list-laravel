@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Carbon\Carbon;
 // use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +15,23 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $tasks = Task::where('user_id', Auth::id())
+            ->orderBy('is_complete', 'asc')
             ->orderBy('priority', 'desc')
             ->orderBy('created_at', 'asc')
             ->get();
 
-        return view('mytasks', compact('tasks'));
+        // mencari deadline hari ini dan besok
+        $reminderTask = Task::where('user_id', Auth::id())
+            ->whereDate('deadline', '<=', Carbon::now()->addDays(1))
+            ->whereDate('deadline', '>=', Carbon::now())
+            ->get();
+
+        // dd([
+        //     'carbon_tomorrow' => Carbon::tomorrow()->toDateString(),
+        //     'task_deadlines' => Task::where('user_id', Auth::id())->pluck('deadline'),
+        // ]);
+
+        return view('mytasks', compact('tasks', 'reminderTask'));
     }
 
     // create subtask
@@ -50,8 +63,14 @@ class TaskController extends Controller
         $task->complete_at = $task->is_complete ? now() : null;
         $task->save();
 
+        $isReminder = !$task->is_complete && Carbon::parse($task->deadline)->isSameDay(Carbon::tomorrow());
+
         // untuk ajax respons
-        return response()->json(['success' => true, 'is_complete' => $task->is_complete]);
+        return response()->json([
+            'success' => true,
+            'is_complete' => $task->is_complete,
+            'is_reminder' => $isReminder
+        ]);
     }
 
     // memunculkan form edit

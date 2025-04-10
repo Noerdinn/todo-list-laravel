@@ -1,6 +1,6 @@
 @props(['user'])
 <aside id="default-sidebar"
-    class="sm:relative fixed top-0 left-0 z-40 w-60 h-screen transition-transform duration-500 ease-out -translate-x-full sm:translate-x-0 border-r-2 border-black bg-black"
+    class="sm:relative fixed top-0 left-0 z-40 w-60 h-dvh transition-transform duration-500 ease-out -translate-x-full sm:translate-x-0 border-r-2 border-black"
     aria-label="Sidebar">
     <div class="h-full px-4 py-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium font-MadeforText h-full flex flex-col justify-between">
@@ -51,7 +51,7 @@
                             {{ $user->name }}</p>
                         <p class="text-sm ">{{ $user->email }}</p>
                         <button id="logout-btn"
-                            class="flex w-full items-center py-2 justify-center rounded-xl text-white border-black transition-all border-2 my-3 bg-[#E53123] hover:bg-[#CA2B24] hover:translate-y-[3px] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]">
+                            class="flex w-full items-center py-2 justify-center rounded-lg text-white border-black transition-all border-2 my-3 bg-[#E53123] hover:bg-[#CA2B24] hover:translate-y-[3px] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             <span class="ms-3">Logout</span>
                         </button>

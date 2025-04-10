@@ -35,7 +35,7 @@ class SubtaskController extends Controller
             // return view('tasks.detail', compact('task'));
             return view('tasks.detail', ['task' => $task]);
         } catch (\Exception $e) {
-            \Log::error('Error fetching task details: ' . $e->getMessage());
+            // \Log::error('Error fetching task details: ' . $e->getMessage());
             return response()->json(['error' => 'Terjadi kesalahan pada server'], 500);
         }
     }
