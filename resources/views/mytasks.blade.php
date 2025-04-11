@@ -3,7 +3,7 @@
 @section('content')
 
     <div
-        class=" p-6 h-full scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full container-pattern">
+        class=" p-6 h-full scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full bg-[#EAE9E5]">
         <div
             class="grid md:grid-rows-[auto_1fr] grid-rows-[min-content_1fr] grid-cols-2 md:gap-4 gap-4 font-MadeforText h-full">
             <div class="row-start-1 h-min">
@@ -11,7 +11,7 @@
                     <div class="md:col-span-4">
                         <!-- Modal toggle -->
                         <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
-                            class="block p-2 rounded-lg border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all border-2 font-medium md:text-base text-sm w-full text-white hover:bg-[#3A66B1] bg-[#3085d6]"
+                            class="block p-2 rounded-lg border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all border-2 font-medium md:text-base text-sm w-full text-white bg-[#5E74A6]"
                             type="button">
                             Create Task
                         </button>
@@ -28,7 +28,7 @@
             <div {{-- konten task --}}
                 class="row-start-2 min-h-[60vh] max-h-[calc(100vh-185px)] md:col-span-1 col-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent scrollbar-thumb-rounded-full p-5 border-2 rounded-lg border-black shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] me-0 mb-0 md:me-2 md:mb-2 bg-white flex flex-col ">
                 <div class="flex mb-3">
-                    <p class="md:text-xl text-lg font-medium">Task</p>
+                    <p class="md:text-xl text-base font-medium">Task</p>
                 </div>
 
                 <div class="flex-1 ">
@@ -37,7 +37,7 @@
                         <div data-task-id="{{ $task->id }}" onclick="showDetailTask({{ $task->id }})"
                             class="task-item flex
                                 justify-between py-2 px-3 md:px-4 mb-3 md:mb-4 border-2 rounded-lg border-black transition-all ease-out 
-                                shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] overflow-x-hidden hover:shadow-none hover:translate-y-[3px] hover:bg-[#e1e3e5] cursor-pointer">
+                                shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] overflow-x-hidden hover:shadow-none hover:translate-y-[3px] hover:bg-[#EAE9E5] cursor-pointer">
                             <div class="flex justify-between items-center w-full">
 
                                 {{-- update is_complete selesai atau tidak selesai menggunakan ajax --}}
@@ -51,7 +51,7 @@
                                     {{-- icon status --}}
                                     <div class="flex items-center">
                                         <i
-                                            class="toggle-task-status md:text-xl text-sm {{ $task->is_complete ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle' }}"></i>
+                                            class="toggle-task-status md:text-xl text-sm {{ $task->is_complete ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle' }}"></i>
                                     </div>
 
                                     {{-- title task --}}
@@ -78,10 +78,10 @@
                                                 class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E53123] text-white">High</span>
                                         @elseif ($task->priority === 'medium')
                                             <span
-                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#efce31]">Medium</span>
+                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E9C452]">Medium</span>
                                         @elseif ($task->priority === 'low')
                                             <span
-                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black text-white bg-[#3C6CCE]">Low</span>
+                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black text-white bg-[#5E74A6]">Low</span>
                                         @endif
                                     </div>
                                 </div>

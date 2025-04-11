@@ -14,7 +14,7 @@
 
                 <li>
                     <a href="{{ route('home.page') }}"
-                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'home.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
+                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'home.page' ? 'translate-y-[3px] shadow-none bg-[#C0A142]' : 'hover:translate-y-[3px] bg-[#E9C452] hover:bg-[#C0A142] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
                         <i class="fa-solid fa-house"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">Home</span>
                     </a>
@@ -22,18 +22,22 @@
 
                 <li>
                     <a href="{{ route('mytasks.page') }}"
-                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'mytasks.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
-                        <i class="fa-solid fa-list-check"></i>
+                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'mytasks.page' ? 'translate-y-[3px] shadow-none bg-[#C0A142]' : 'hover:translate-y-[3px] bg-[#E9C452] hover:bg-[#C0A142] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
+                        {{-- <i class="fa-solid fa-list-check"></i> --}}
+                        <i class="fa-solid fa-rectangle-list"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">My Tasks</span>
-                        <span {{-- jika ada tugas maka tampilkan indikator bulat --}}
+                        {{-- jika ada tugas maka tampilkan indikator bulat --}}
+                        {{-- logika ada di service provider --}}
+                        <span
                             class="{{ $taskCount == 0 ? 'hidden' : 'inline-flex' }}  items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full ">{{ $taskCount }}</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('history.page') }}"
-                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'history.page' ? 'translate-y-[3px] shadow-none bg-[#c4aa27]' : 'hover:translate-y-[3px] bg-[#efce31] hover:bg-[#c4aa27] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
-                        <i class="fa-regular fa-clock"></i>
+                        class="flex items-center py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 group ease-out {{ Route::currentRouteName() === 'history.page' ? 'translate-y-[3px] shadow-none bg-[#C0A142]' : 'hover:translate-y-[3px] bg-[#E9C452] hover:bg-[#C0A142] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none' }}">
+                        {{-- <i class="fa-regular fa-clock"></i> --}}
+                        <i class="fa-solid fa-clock"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">History</span>
                     </a>
                 </li>
@@ -51,7 +55,7 @@
                             {{ $user->name }}</p>
                         <p class="text-sm ">{{ $user->email }}</p>
                         <button id="logout-btn"
-                            class="flex w-full items-center py-2 justify-center rounded-lg text-white border-black transition-all border-2 my-3 bg-[#E53123] hover:bg-[#CA2B24] hover:translate-y-[3px] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]">
+                            class="flex w-full items-center py-2 justify-center rounded-lg text-white border-black transition-all border-2 my-3 bg-[#E85446] hover:bg-[#cf4a3e] hover:translate-y-[3px] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             <span class="ms-3">Logout</span>
                         </button>

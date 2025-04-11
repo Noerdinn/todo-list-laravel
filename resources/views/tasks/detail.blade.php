@@ -1,27 +1,37 @@
 <div class="flex-grow-1 p-5">
     <div class="flex flex-col mb-1 mt-1 gap-2">
-        <p class="md:text-xl text-lg font-medium">Detail Task</p>
+        <div class="flex justify-between items-center">
+
+            <p class="md:text-xl text-base font-medium ">Detail Task</p>
+            @if ($task->is_complete)
+                <i class="fa-solid fa-circle-check md:text-2xl text-base text-[#4A9F93]"></i>
+            @endif
+
+
+        </div>
         {{-- title --}}
-        <h1 id="task-title" class="md:text-3xl text-base font-semibold capitalize">{{ $task->title }}</h1>
+        <h1 id="task-title" class="md:text-3xl text-lg font-semibold capitalize">{{ $task->title }}</h1>
     </div>
 
-    <div class="my-6 bg-[#e1e3e5] p-4 border-2 border-black rounded-lg">
+    <div class="my-6 bg-[#EAE9E5] p-4 border-2 border-black rounded-lg">
         <div class="grid md:grid-cols-[130px_1fr] grid-cols-[100px_1fr] gap-y-3 items-center">
-            {{-- Status --}}
-            <p class="md:text-lg text-base font-medium">Status</p>
-            <p
-                class="status-lable-task text-white md:text-sm text-xs border-2 border-black {{ $task->is_complete ? 'bg-green-700' : 'bg-red-500' }}  w-fit text-center px-5 py-0.5 rounded-full">
-                {{ $task->is_complete ? 'Complete' : 'Incomplete' }}</p>
 
             {{-- created task --}}
             <p class="md:text-lg text-base font-medium">Created At</p>
             <p class="flex items-center gap-1.5 md:text-base text-sm">
+                <i class="fa-solid fa-calendar-days text-black"></i>
                 {{ $task->created_at->format('d F Y') }}
             </p>
 
+            {{-- Status --}}
+            <p class="md:text-lg text-base font-medium">Status</p>
+            <p
+                class="status-lable-task text-white md:text-sm text-xs border-2 border-black {{ $task->is_complete ? 'bg-[#4A9F93]' : 'bg-[#E85446]' }}  w-fit text-center px-5 py-0.5 rounded-full">
+                {{ $task->is_complete ? 'Complete' : 'Incomplete' }}</p>
+
             {{-- Deadline --}}
             <p class="md:text-lg text-base font-medium">Deadline</p>
-            <p class="flex items-center gap-1.5 md:text-base text-sm">
+            <p class="flex items-center gap-1.5 md:text-base text-sm ">
                 <i class="fa-solid fa-stopwatch text-black "></i>
                 {{ \Carbon\Carbon::parse($task->deadline)->format('d F Y') }}
             </p>
@@ -30,16 +40,16 @@
             <p class="md:text-lg text-base font-medium">Priority</p>
             @if ($task->priority === 'high')
                 <p
-                    class="text-white bg-[#E53123] w-fit text-center px-4 py-0.5 rounded-full border-2 border-black md:text-sm text-xs">
+                    class="text-white bg-[#E85446] w-fit text-center px-4 py-0.5 rounded-full border-2 border-black md:text-sm text-xs">
                     High
                 </p>
             @elseif ($task->priority === 'medium')
                 <p
-                    class="text-black bg-[#efce31] w-fit text-center px-4 py-0.5 rounded-full border-2 border-black md:text-sm text-xs">
+                    class="text-black bg-[#E9C452] w-fit text-center px-4 py-0.5 rounded-full border-2 border-black md:text-sm text-xs">
                     Medium</p>
             @elseif ($task->priority === 'low')
                 <p
-                    class="text-white bg-[#3C6CCE] w-fit text-center px-4 py-0.5 rounded-full border-2 border-black md:text-sm text-xs">
+                    class="text-white bg-[#5E74A6] w-fit text-center px-4 py-0.5 rounded-full border-2 border-black md:text-sm text-xs">
                     Low
                 </p>
             @endif
@@ -62,7 +72,8 @@
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
-                    <i class="fa-regular fa-circle-check "></i>
+                    {{-- <i class="fa-regular fa-circle-check "></i> --}}
+                    <i class="fa-solid fa-circle-check"></i>
                     <span class="hidden md:block">Complete Task</span>
                 </button>
             </div>
@@ -70,11 +81,12 @@
             {{-- trigger delete task --}}
             <div>
                 <button
-                    class="delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out bg-[#E53123] text-white"
+                    class="delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out bg-[#E85446] text-white"
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
-                    <i class="fa-regular fa-trash-can "></i>
+                    <i class="fa-solid fa-trash"></i>
+                    {{-- <i class="fa-regular fa-trash-can "></i> --}}
                     <span class="hidden md:block">Delete</span>
                 </button>
 
@@ -88,10 +100,11 @@
             {{-- trigger edit task --}}
             <div>
                 <button onclick="showEditTask({{ $task->id }})"
-                    class="edit-button py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out text-white bg-[#3C6CCE] {{ $task->is_complete ? 'hidden' : '' }}">
+                    class="edit-button py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out text-white bg-[#3D97CC] {{ $task->is_complete ? 'hidden' : '' }}">
                     <div class="block md:hidden">
                     </div>
-                    <i class="fa-regular fa-pen-to-square "></i>
+                    {{-- <i class="fa-regular fa-pen-to-square "></i> --}}
+                    <i class="fa-solid fa-pen"></i>
                     <span class="hidden md:block">Edit</span>
                 </button>
             </div>
@@ -117,6 +130,6 @@
             class="md:text-base text-sm border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
             placeholder="Add new subtask">
         <button id="add-subtask-btn"
-            class="md:text-base text-sm shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all mb-1 border-black border-2 text-white bg-[#3C6CCE] p-2 px-4 rounded-lg">+Add</button>
+            class="md:text-base text-sm shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all mb-1 border-black border-2 text-white bg-[#3D97CC] p-2 px-4 rounded-lg">+Add</button>
     </div>
 </div>

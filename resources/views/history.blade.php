@@ -3,26 +3,29 @@
 @section('content')
 
     <div class="p-4 h-full font-MadeforText">
-        <div class="relative overflow-x-auto border-2 rounded-lg border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
+        <div class="relative overflow-x-auto border-2 rounded-lg border-black shadow-[0px_5px_0px_0px_rgba(0,0,0,1)]">
             <table class="w-full text-sm text-left rtl:text-right text-black">
-                <thead class="md:text-base text-xs text-white uppercase bg-black">
+                <thead class="md:text-base text-xs text-black uppercase bg-[#E9C452]">
                     <tr>
                         <th scope="col" class="px-6 py-3">
+                            #
+                        </th>
+                        <th scope="col" class="pe-6 py-3">
                             Task Name
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="pe-6 py-3">
                             Priority
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Deadline
-                        </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="pe-6 py-3">
                             Status
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="pe-6 py-3 text-nowrap">
                             Created At
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="pe-6 py-3">
+                            Deadline
+                        </th>
+                        <th scope="col" class="pe-6 py-3 text-nowrap">
                             Complete At
                         </th>
                     </tr>
@@ -36,25 +39,47 @@
                         </tr>
                     @else
                         @foreach ($tasks as $task)
-                            <tr class="bg-white border-t-2 border-black ">
-                                <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                            <tr class="bg-white border-t-2 border-black text-nowrap">
+                                <td class="px-6 py-3">{{ $loop->iteration }}</td>
+                                <td scope="row"
+                                    class="pe-6 py-4 font-medium text-black whitespace-nowrap truncate md:max-w-10 max-w-36"
+                                    title="{{ $task->title }}">
                                     {{ $task->title }}
-                                </th>
-                                <td class="px-6 py-4">
-                                    {{ $task->priority }}
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}
+                                <td class="pe-6 py-4">
+                                    @if ($task->priority === 'high')
+                                        <span
+                                            class="py-1 px-2 md:font-medium text-xs rounded-[4px] border-2 border-black bg-[#E53123] text-white">High</span>
+                                    @elseif ($task->priority === 'medium')
+                                        <span
+                                            class="py-1 px-2 md:font-medium text-xs rounded-[4px] border-2 border-black bg-[#E9C452]">Medium</span>
+                                    @elseif ($task->priority === 'low')
+                                        <span
+                                            class="py-1 px-2 md:font-medium text-xs rounded-[4px] border-2 border-black text-white bg-[#5E74A6]">Low</span>
+                                    @endif
+                                    {{-- {{ $task->priority }} --}}
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{-- nanti tambahkan kolom baru untuk end_at --}}
+                                <td class="pe-6 py-4 font-medium flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check text-[#4A9F93]"></i>
                                     {{ $task->is_complete ? 'Selesai' : 'Belum Selesai' }}
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{ $task->created_at->format('d M Y') }}
+                                <td class="pe-6 py-4 font-medium text-nowrap ">
+                                    <div class="flex gap-2 items-center">
+                                        <i class="fa-solid fa-clock"></i>
+                                        {{ $task->created_at->format('d M Y') }}
+                                    </div>
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($task->complete_at)->format('d M Y') }}
+                                <td class="pe-6 py-4 font-medium text-nowrap">
+                                    <div class="flex gap-2 items-center">
+                                        <i class="fa-solid fa-stopwatch"></i>
+                                        {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}
+                                    </div>
+                                </td>
+                                <td class="pe-6 py-4 font-medium text-nowrap ">
+                                    <div class="flex gap-2 items-center">
+                                        <i class="fa-solid fa-clock"></i>
+                                        {{ \Carbon\Carbon::parse($task->complete_at)->format('d M Y') }}
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

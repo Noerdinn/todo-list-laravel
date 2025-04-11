@@ -35,7 +35,7 @@
                         <textarea name="description" type="text" id="description" rows="2"
                             class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full md:p-2.5 p-2"></textarea>
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
+                    <div class="sm:col-span-1">
                         <label for="deadline" class="block text-base font-semibold text-black">Deadline</label>
 
                         <div class="relative max-w-sm">
@@ -45,7 +45,7 @@
                         </div>
 
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
+                    <div class="sm:col-span-1">
                         <label for="priority" class="block text-base font-semibold text-black">Select
                             Priority</label>
                         <select id="priority" name="priority"

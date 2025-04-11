@@ -49,7 +49,7 @@
         <div class="block md:hidden ">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
                 aria-controls="default-sidebar" type="button"
-                class="inline-flex items-center p-2  text-sm text-black rounded-lg sm:hidden hover:bg-black focus:outline-none focus:ring-2 hover:text-white">
+                class="inline-flex items-center p-2  text-sm text-black rounded-lg sm:hidden hover:bg-black hover:text-white">
                 <span class="sr-only">Open sidebar</span>
                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">

@@ -4,6 +4,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+::selection {
+    color: #eae9e5;
+    background: #5e74a6;
+}
+
 .loading-neo div {
     animation-duration: 0.6s;
 }

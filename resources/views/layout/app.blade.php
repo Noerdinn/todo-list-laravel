@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="h-[100dvh]">
+<body class="h-[100dvh] select-text">
 
     <x-bounce-time></x-bounce-time>
 

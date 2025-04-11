@@ -63,9 +63,9 @@ async function showDetailTask(taskId = null) {
         // Update task list styling
         document.querySelectorAll(".task-item").forEach((item) => {
             item.classList.add("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
-            item.classList.remove("bg-[#e1e3e5]", "translate-y-[3px]");
+            item.classList.remove("bg-[#EAE9E5]", "translate-y-[3px]");
             if (item.dataset.taskId === taskId.toString()) {
-                item.classList.add("bg-[#e1e3e5]", "translate-y-[3px]");
+                item.classList.add("bg-[#EAE9E5]", "translate-y-[3px]");
                 item.classList.remove("shadow-[0px_3px_0px_0px_rgba(0,0,0,1)]");
             }
         });
