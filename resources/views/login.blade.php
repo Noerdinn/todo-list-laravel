@@ -104,7 +104,7 @@
         </div>
         <div class="col-span-2 h-full hidden md:block">
             <div class=" justify-center flex h-full">
-                <img src="{{ asset('img/Gambar 1.jpg') }}" alt="" class="h-full">
+                <img src="{{ asset('img/Tasks 1.jpg') }}" alt="Tasks" class="h-full">
             </div>
         </div>
     </div>

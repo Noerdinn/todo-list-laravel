@@ -61,7 +61,10 @@ class SubtaskController extends Controller
                 [
                     'message' => 'Subtask created successfully',
                     'subtask' => $subtask,
-                    'html' => view('tasks.subtask', compact('subtask'))->render(),
+                    'html' => view('tasks.subtask', [
+                        'subtask' => $subtask,
+                        'task' => $subtask->task,
+                    ])->render(),
                 ],
                 201
             );
@@ -99,7 +102,10 @@ class SubtaskController extends Controller
     // merender component subtask, digunakan di fungsi handleToggleSubtask()
     public function getSubtaskHtml(Subtask $subtask)
     {
-        return view('tasks.subtask', compact('subtask'))->render();
+        return view('tasks.subtask', [
+            'subtask' => $subtask,
+            'task' => $subtask->task,
+        ])->render();
     }
 
     // hapus subtask

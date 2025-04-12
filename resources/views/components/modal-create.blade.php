@@ -26,7 +26,8 @@
                     <div class="col-span-2">
                         <label for="title"
                             class="block md:text-base text-base font-semibold text-black">Title</label>
-                        <input type="text" name="title" id="title"
+                        <input type="text" name="title" id="title" placeholder="30 Character Max"
+                            maxlength="30"
                             class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium  rounded-lg outline-none block w-full md:p-2.5 p-2"
                             required>
                     </div>
@@ -58,7 +59,7 @@
                     </div>
                 </div>
                 <button type="submit"
-                    class="flex w-full text-center justify-center p-2 rounded-lg text-white border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none hover:bg-[#3A66B1] bg-[#3085d6] transition-all border-2 mb-5 mt-6 font-medium">
+                    class="flex w-full text-center justify-center p-2 rounded-lg text-white border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none bg-[#3D97CC] transition-all border-2 mb-5 mt-6 font-medium">
                     Add Task
                 </button>
             </form>

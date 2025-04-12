@@ -7,7 +7,7 @@ window.showAlert = function (type, message) {
         icon: type, // Bisa: 'success', 'error', 'warning', 'info'
         title: type === "success" ? "Success" : "Oops!",
         text: message,
-        confirmButtonColor: "#3085d6",
+        // confirmButtonColor: "#3085d6",
         background: "#f8f9fa",
         scrollbarPadding: false, // Mencegah pergeseran layout
         customClass: {
@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 text: "You will be logged out!",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
+                // confirmButtonColor: "#d33",
+                // cancelButtonColor: "#3085d6",
                 confirmButtonText: "Yes, log out!",
                 cancelButtonText: "Cancel",
                 scrollbarPadding: "false",

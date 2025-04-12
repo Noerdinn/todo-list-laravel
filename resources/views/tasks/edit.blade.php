@@ -49,7 +49,7 @@
 
             <div class="col-span-2 mt-2 flex justify-end">
                 <button type="submit"
-                    class="flex w-full text-center justify-center p-2 rounded-lg border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] ease-out hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] hover:bg-[#3A66B1] bg-[#3085d6] text-white transition-all border-2 font-medium">Save</button>
+                    class="flex w-full text-center justify-center p-2 rounded-lg border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] ease-out hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)] bg-[#5e74a6] text-white transition-all border-2 font-medium">Save</button>
             </div>
         </div>
     </form>

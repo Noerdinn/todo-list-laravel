@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
             setTimeout(() => {
                 loadingScreen.style.display = "none";
             }, 500);
-        }, 1000);
+        });
     }
 });
 

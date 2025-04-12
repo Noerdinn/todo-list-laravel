@@ -3,7 +3,9 @@
     data-id="{{ $subtask->id }}">
 
     <div class="flex">
-        <button class="toggle-complete flex items-center md:text-xl text-sm ">
+        <button
+            class="toggle-complete flex items-center md:text-xl text-sm disable {{ $task->is_complete ? 'cursor-not-allowed' : '' }}"
+            {{ $task->is_complete ? 'disabled' : '' }}>
             @if ($subtask->is_complete)
                 {{-- <i class="fa-regular fa-circle-check"></i> --}}
                 <i class="fa-solid fa-circle-check"></i>
@@ -17,7 +19,9 @@
     </div>
     <div class="flex">
         <div class="flex h-full">
-            <button class="delete-subtask flex h-full items-center md:text-xl text-sm ">
+            <button
+                class="delete-subtask flex h-full items-center md:text-xl text-sm {{ $task->is_complete ? 'cursor-not-allowed' : '' }}"
+                {{ $task->is_complete ? 'disabled' : '' }}>
                 {{-- <i class="fa-regular fa-circle-xmark md:text-xl text-sm"></i> --}}
                 <i class="fa-solid fa-circle-xmark"></i>
             </button>

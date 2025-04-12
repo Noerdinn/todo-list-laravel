@@ -23,7 +23,7 @@ class TaskFactory extends Factory
             'title' => fake()->sentence(4),
             'description' => fake()->text(),
             'deadline' => now(),
-            'is_complete' => false,
+            'is_complete' => true,
             'priority' => 'high',
 
         ];

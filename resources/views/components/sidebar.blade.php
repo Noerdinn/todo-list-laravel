@@ -7,7 +7,7 @@
             <div>
                 <li>
                     <a href="{{ route('home.page') }}"
-                        class="flex items-center p-2 rounded-full text-black border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[4px] hover:shadow-none hover:bg-[#e1e3e5] transition-all ease-out border-2 mb-10 text-center w-full group">
+                        class="flex items-center p-2 rounded-full text-black border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[4px] hover:shadow-none hover:bg-[#EAE9E5] transition-all ease-out border-2 mb-10 text-center w-full group">
                         <img src="{{ asset('img/Neo List Typo.png') }}" alt="" class="flex px-3">
                     </a>
                 </li>
@@ -46,7 +46,7 @@
             <div>
                 <li>
                     <div
-                        class="py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 mx-1 shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] bg-[#e1e3e5]">
+                        class="py-2 px-4 rounded-lg text-black border-black transition-all border-2 mb-5 mx-1 shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] bg-[#EAE9E5]">
                         <div class="rounded-full md:me-0 my-4">
                             <img class="w-25 h-20 m-auto border-black border-2 rounded-full"
                                 src="{{ asset('img/Profile-img-b.png') }}" alt="user photo">

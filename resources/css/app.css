@@ -9,6 +9,7 @@
     background: #5e74a6;
 }
 
+/* loading animation */
 .loading-neo div {
     animation-duration: 0.6s;
 }
@@ -22,11 +23,13 @@
 .loading-neo div:nth-child(3) {
     animation-delay: 0.3s;
 }
+
+/* background pattern */
 .container-pattern {
     width: 100%;
     height: 100%;
-    --color: #dbd5d6;
-    background-color: #e6e5e5;
+    --color: rgba(94, 116, 166, 0.1);
+    background-color: #eae9e5;
     background-image: linear-gradient(
             0deg,
             transparent 24%,
@@ -54,6 +57,7 @@
     background-size: 55px 55px;
 }
 
+/* alert pop up */
 .custom-swal-popup {
     font-family: "Wix Madefor Display";
     border: 3px solid black !important;
@@ -76,7 +80,7 @@
 .custom-swal-button {
     border-radius: 7px !important;
     border: 2px solid black !important;
-    background-color: #3085d6 !important;
+    background-color: #5e74a6 !important;
     color: white !important;
     padding: 8px 20px !important;
     transition: all;
@@ -92,7 +96,7 @@
 .custom-swal-delete-button {
     border-radius: 7px !important;
     border: 2px solid black !important;
-    /* background-color: #3085d6 !important; */
+    background-color: #e85446 !important;
     color: white !important;
     /* padding: 8px 20px !important; */
     transition: all;
@@ -106,7 +110,7 @@
 .custom-swal-cancel-button {
     border-radius: 7px !important;
     border: 2px solid black !important;
-    /* background-color: #3085d6 !important; */
+    background-color: #5e74a6 !important;
     color: white !important;
     /* padding: 8px 20px !important; */
     transition: all;
@@ -118,6 +122,7 @@
     box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1) !important;
 }
 
+/* deadline icon animation */
 @keyframes wiggle {
     0%,
     100% {

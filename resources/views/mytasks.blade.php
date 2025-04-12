@@ -3,7 +3,7 @@
 @section('content')
 
     <div
-        class=" p-6 h-full scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full bg-[#EAE9E5]">
+        class=" p-6 h-full scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full container-pattern">
         <div
             class="grid md:grid-rows-[auto_1fr] grid-rows-[min-content_1fr] grid-cols-2 md:gap-4 gap-4 font-MadeforText h-full">
             <div class="row-start-1 h-min">
@@ -66,7 +66,7 @@
                                     <div
                                         class="flex reminder-icon items-center {{ $reminderTask->contains('id', $task->id) && !$task->is_complete ? '' : 'hidden' }}">
 
-                                        <i class="fa-solid fa-stopwatch animate-wiggle text-[#E53123] md:text-xl text-sm"
+                                        <i class="fa-solid fa-stopwatch animate-wiggle text-[#E85446] md:text-xl text-sm"
                                             title="Deadline dalam 1 hari"></i>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                     <div class="flex items-center">
                                         @if ($task->priority === 'high')
                                             <span
-                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E53123] text-white">High</span>
+                                                class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E85446] text-white">High</span>
                                         @elseif ($task->priority === 'medium')
                                             <span
                                                 class="py-1 px-2 md:text-xs text-xs rounded-[4px] border-2 border-black bg-[#E9C452]">Medium</span>

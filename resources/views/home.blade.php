@@ -1,12 +1,12 @@
 @extends('layout.app')
 @section('title', 'Home')
 @section('content')
-    <div class="p-4 h-full bg-[#EAE9E5]">
+    <div class="p-4 h-full container-pattern">
         <div class="h-full flex items-center justify-center font-MadeforDisplay">
             <div class="text-center select-none">
                 <h1 class="md:text-6xl text-5xl font-normal tracking-tight text-black capitalize">
                     {{ $greeting }},
-                    {{ explode(' ', Auth::user()->name)[0] }}<strong class="text-[#5E74A6]">.</strong></h1>
+                    {{ explode(' ', Auth::user()->name)[0] }}<strong class="text-[#5e74a6]">.</strong></h1>
                 <p class="md:text-xl text-base font-medium text-black mt-3">It's time to plan what you want to do.
                 </p>
                 {{-- grid --}}
@@ -14,7 +14,7 @@
 
 
                     <div
-                        class="flex flex-col md:flex-row items-center justify-center bg-white active:bg-[#E6E5E5] text-black row-start-1 row-end-3 md:col-start-2 md:col-span-2 col-span-3 rounded-lg border-2 border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] transition-all h-fit py-5">
+                        class="flex flex-col md:flex-row items-center justify-center bg-white active:bg-[#EAE9E5] text-black row-start-1 row-end-3 md:col-start-2 md:col-span-2 col-span-3 rounded-lg border-2 border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] transition-all h-fit py-5">
                         {{-- <i class="md:text-2xl text-2xl mb-3 fa-regular fa-circle-check"></i> --}}
                         <i class="md:text-2xl text-2xl text-[#5E74A6] mb-3 md:mb-0 fa-solid fa-circle-check"></i>
                         <p
@@ -25,7 +25,7 @@
                     </div>
 
                     <div
-                        class="flex flex-col md:flex-row items-center justify-center bg-white active:bg-[#E6E5E5] text-black row-start-1 row-end-3 md:col-span-2 col-span-3 rounded-lg border-2 border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] transition-all h-fit py-5">
+                        class="flex flex-col md:flex-row items-center justify-center bg-white active:bg-[#EAE9E5] text-black row-start-1 row-end-3 md:col-span-2 col-span-3 rounded-lg border-2 border-black shadow-[0px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-y-[4px] transition-all h-fit py-5">
 
                         {{-- <i class="md:text-2xl text-2xl mb-3 fa-regular fa-circle"></i> --}}
                         <i class="md:text-2xl text-2xl text-[#5E74A6] mb-3 md:mb-0 fa-solid fa-rectangle-list"></i>
