@@ -20,12 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/mytasks', [TaskController::class, 'index'])->name('mytasks.page');
     Route::post('/mytasks', [TaskController::class, 'store'])->name('mytasks.store');
     // {asd} adalah paremeter
-    // Route::put('/mytasks/{id}', [TaskController::class, 'update'])->name('mytasks.update');
+    // menampilkan form update
+    Route::get('/mytasks/{task}/edit', [TaskController::class, 'edit'])->name('mytask.edit');
+    // mensubmit form update
     Route::put('/mytasks/{task}', [TaskController::class, 'update'])->name('mytasks.update');
     Route::delete('/mytask/{id}', [TaskController::class, 'destroy'])->name('mytasks.delete');
     // toggle untuk button mark as complete
     Route::post('/mytasks/{task}/toggle', [TaskController::class, 'toggleStatus'])->name('mytask.toggle');
-    Route::get('/mytasks/{task}/edit', [TaskController::class, 'edit'])->name('mytask.edit');
 
     // SUBTASK
     // menampilkan subtask

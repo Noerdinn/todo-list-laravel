@@ -61,12 +61,10 @@ class AuthController extends Controller
         ]);
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat.');
     }
-
     public function showLogin()
     {
         return view('login');
     }
-
     // validasi login
     public function autenticate(Request $request): RedirectResponse
     {
@@ -89,7 +87,6 @@ class AuthController extends Controller
                 : 'Email yang anda masukkan salah.'
         ]);
     }
-
     // untuk logout
     function logout()
     {

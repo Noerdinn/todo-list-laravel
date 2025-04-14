@@ -27,7 +27,6 @@ class TaskController extends Controller
 
         return view('mytasks', compact('tasks', 'reminderTask'));
     }
-
     // create subtask
     public function store(Request $request)
     {
@@ -79,7 +78,6 @@ class TaskController extends Controller
             'deadline' => 'required|date',
             'priority' => 'required|in:low,medium,high',
         ]);
-
         $task->update([
             'title' => $request->title,
             'description' => $request->description,

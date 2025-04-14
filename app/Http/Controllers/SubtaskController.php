@@ -36,7 +36,6 @@ class SubtaskController extends Controller
             return response()->json(['error' => 'Terjadi kesalahan pada server'], 500);
         }
     }
-
     // tambah subtask baru
     public function storeSubtask(Request $request, Task $task)
     {
@@ -69,7 +68,6 @@ class SubtaskController extends Controller
             ], 500);
         }
     }
-
     // togggle status subtask (selesai / belum)
     public function toggleStatusSubtask(Subtask $subtask)
     {
@@ -91,8 +89,6 @@ class SubtaskController extends Controller
             ], 500);
         }
     }
-
-
     // merender component subtask, digunakan di fungsi handleToggleSubtask()
     public function getSubtaskHtml(Subtask $subtask)
     {
@@ -101,12 +97,10 @@ class SubtaskController extends Controller
             'task' => $subtask->task,
         ])->render();
     }
-
     // hapus subtask
     public function deleteSubtask(Subtask $subtask)
     {
         $subtask->delete();
-
         return response()->json([
             'message' => 'Subtask delete successfully',
         ]);

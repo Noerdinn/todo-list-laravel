@@ -14,10 +14,10 @@ window.addEventListener("load", () => {
         });
     }
 });
-
 document.addEventListener("DOMContentLoaded", () => {
     showDetailTask(null);
 });
+
 // fungsi untuk menampilkan detail task
 async function showDetailTask(taskId = null) {
     const taskDetailContainer = document.getElementById(
@@ -47,12 +47,6 @@ async function showDetailTask(taskId = null) {
     }
 
     try {
-        // Tampilkan loading state
-        taskDetailContainer.innerHTML = `
-            <div class="h-full flex items-center justify-center">
-                <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-black"></div>
-            </div>`;
-
         const response = await fetch(`/mytasks/${taskId}/subtasks`);
         if (!response.ok) throw new Error("Gagal mengambil data subtasks.");
 
@@ -141,15 +135,11 @@ document.addEventListener("click", function (event) {
         });
     }
 });
-
 // Fungsi untuk menampilkan form edit task
 async function showEditTask(taskId) {
-    // event.preventDefault();
-
     const taskDetailContainer = document.getElementById(
         "task-detail-container"
     );
-
     try {
         // Tampilkan loading sementara
         taskDetailContainer.innerHTML = `
@@ -167,11 +157,8 @@ async function showEditTask(taskId) {
         console.error(error);
     }
 }
-
 // fungsi untuk mensubmit hasil edit
 async function updateTask(event, taskId) {
-    // event.preventDefault();
-
     const form = document.getElementById(`edit-task-form-${taskId}`);
     const formData = new FormData(form);
 
@@ -251,8 +238,6 @@ async function handleToggleSubtask(event) {
         });
 
         if (!response.ok) throw new Error("Failed update the subtask");
-
-        // const data = await response.json();
 
         // ambil ulang html dari server setelah update
         const newSubtaskHtml = await fetch(`/mytasks/${subtaskId}/html`);
