@@ -48,29 +48,18 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
         ]);
-
         // jika tidak valid tampilkan error
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat.');
-
-
-        // $user = new User();
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = bcrypt($request->password);
-        // $user->save();
-        // return redirect()->route('login');
     }
 
     public function showLogin()

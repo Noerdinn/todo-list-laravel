@@ -23,9 +23,7 @@
 </head>
 
 <body class="h-dvh font-MadeforDisplay">
-
     <x-bounce-time></x-bounce-time>
-
     <div class="h-full grid grid-cols-5 gap-8 md:grid-rows-1 grid-rows-2 md:items-center px-8 ">
 
         <div class="md:col-span-2 col-span-full self-end md:self-center">
@@ -34,7 +32,7 @@
                 Simple,
                 Straight
                 Forward, and Powerfull<strong class="text-[#3A66B1]">.</strong></h1>
-            <p class="md:mt-8 mt-4 md:text-xl text-base font-medium text-pretty text-black md:text-left text-center">
+            <p class="md:mt-8 mt-4 md:text-xl text-sm font-medium text-pretty text-black md:text-left text-center">
                 Write it
                 down,
                 organize,

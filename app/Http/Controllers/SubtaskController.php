@@ -31,11 +31,8 @@ class SubtaskController extends Controller
                     }),
                 ]);
             }
-
-            // return view('tasks.detail', compact('task'));
             return view('tasks.detail', ['task' => $task]);
         } catch (\Exception $e) {
-            // \Log::error('Error fetching task details: ' . $e->getMessage());
             return response()->json(['error' => 'Terjadi kesalahan pada server'], 500);
         }
     }
@@ -44,18 +41,15 @@ class SubtaskController extends Controller
     public function storeSubtask(Request $request, Task $task)
     {
         try {
-
             // validasi inputan
             $request->validate([
                 'title' => 'required|string|max:255',
             ]);
-
             // menambahkan subtask ke db dengan relasi task
             $subtask = $task->subtasks()->create([
                 'title' => $request->title,
                 'is_complete' => false,
             ]);
-
             // mengembalikan response dalam bentuk json
             return response()->json(
                 [
@@ -117,23 +111,4 @@ class SubtaskController extends Controller
             'message' => 'Subtask delete successfully',
         ]);
     }
-
-    // public function addsubtask(Request $request, $task)
-    // {
-    //     $request->validate([
-    //         'title' => 'required|string|max:255',
-    //     ]);
-
-    //     // Pastikan task ada
-    //     $task = Task::findOrFail($task);
-
-    //     // Simpan subtask
-    //     $subtask = Subtask::create([
-    //         'task_id' => $task->id,
-    //         'title' => $request->title,
-    //         'is_complete' => false,
-    //     ]);
-
-    //     return response()->json(['message' => 'Subtask added successfully', 'subtask' => $subtask]);
-    // }
 }

@@ -103,37 +103,6 @@ window.toggleTaskStatus = function (taskId) {
                 const reminderIcon = document.querySelector(
                     `[data-reminder-icon="${taskId}"]`
                 );
-
-                // jika task sudah selesai atau deadline hari ini/besok maka true
-                // if (reminderIcon) {
-                //     if (data.is_complete || !data.is_reminder) {
-                //         reminderIcon.classList.add("hidden");
-                //     } else {
-                //         reminderIcon.classList.remove("hidden");
-                //     }
-                // }
-
-                // if (data.is_complete) {
-                //     itemList.classList.add("line-through");
-                //     toggleIcon.classList.add("fa-circle-check");
-                //     toggleIcon.classList.remove("fa-circle");
-
-                //     statusLable.textContent = "Complete";
-                //     statusLable.classList.remove("bg-red-500");
-                //     statusLable.classList.add("bg-green-700");
-
-                //     editButton.classList.add("hidden");
-                // } else {
-                //     itemList.classList.remove("line-through");
-                //     toggleIcon.classList.remove("fa-circle-check");
-                //     toggleIcon.classList.add("fa-circle");
-
-                //     statusLable.textContent = "Incomplete";
-                //     statusLable.classList.remove("bg-green-700");
-                //     statusLable.classList.add("bg-red-500");
-
-                //     editButton.classList.remove("hidden");
-                // }
             } else {
                 showAlert("error", "Failed to toggle task status.");
             }
@@ -214,16 +183,6 @@ async function updateTask(event, taskId) {
 
         if (!response.ok) throw new Error("Gagal mengupdate task.");
 
-        // nilai baru dari input
-        // const updateTitle = form.querySelector('input[name="title"]').value;
-
-        // perbarui title tanpa refresh
-        // const titleElemen = document.querySelector(
-        //     `.title-task[data-task-id="${taskId}"]`
-        // );
-        // if (titleElemen) {
-        //     titleElemen.textContent = updateTitle;
-        // }
         showDetailTask(taskId); // Kembali ke tampilan detail setelah update
     } catch (error) {
         console.error(error);
@@ -244,13 +203,6 @@ document.addEventListener("click", async (event) => {
 async function handleAddSubtask() {
     const title = document.getElementById("subtask-title").value.trim();
     const taskId = document.getElementById("current-task-id").value;
-
-    const emptyState = document.querySelector(
-        "#subtasks-container .empty-subtask-state"
-    );
-    if (emptyState) {
-        emptyState.remove();
-    }
 
     if (!title) {
         showAlert("error", "Judul tidak boleh kosong");
@@ -281,7 +233,6 @@ async function handleAddSubtask() {
         })
         .catch((error) => showAlert("error", error.message));
 }
-
 // fungsi untuk mengganti status toggle subtask
 async function handleToggleSubtask(event) {
     const subtaskElement = event.target.closest(".subtask-card");

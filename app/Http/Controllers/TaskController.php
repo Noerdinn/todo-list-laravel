@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use Carbon\Carbon;
-// use Illuminate\Container\Attributes\Auth;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -26,11 +25,6 @@ class TaskController extends Controller
             ->whereDate('deadline', '>=', Carbon::now())
             ->get();
 
-        // dd([
-        //     'carbon_tomorrow' => Carbon::tomorrow()->toDateString(),
-        //     'task_deadlines' => Task::where('user_id', Auth::id())->pluck('deadline'),
-        // ]);
-
         return view('mytasks', compact('tasks', 'reminderTask'));
     }
 
@@ -40,7 +34,7 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'nullable',
-            'deadline' => 'nullable|date',
+            'deadline' => 'required|date',
             'priority' => 'required|string|in:low,medium,high',
         ]);
 
@@ -54,7 +48,6 @@ class TaskController extends Controller
         ]);
         return redirect()->route('mytasks.page')->with('success', 'Task created successfully');
     }
-
     // button task status
     public function toggleStatus(Task $task)
     {
@@ -72,20 +65,18 @@ class TaskController extends Controller
             'is_reminder' => $isReminder
         ]);
     }
-
     // memunculkan form edit
     public function edit(Task $task)
     {
         return view('tasks.edit', compact('task'));
     }
-
     // update / edit task
     public function update(Request $request, Task $task)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'deadline' => 'nullable|date',
+            'deadline' => 'required|date',
             'priority' => 'required|in:low,medium,high',
         ]);
 
@@ -98,7 +89,6 @@ class TaskController extends Controller
 
         return response()->json(['message' => 'Task updated successfully']);
     }
-
     // hapus task
     public function destroy(string $id)
     {
@@ -107,11 +97,13 @@ class TaskController extends Controller
 
         return redirect()->route('mytasks.page')->with('success', 'Task delete successfully');
     }
-
     // menampilkan task history
     public function showHistory()
     {
-        $tasks = Task::where('user_id', Auth::id())->where('is_complete', true)->get();
+        $tasks = Task::where('user_id', Auth::id())
+            ->where('is_complete', true)
+            // ->orderBy('complete_at', 'desc')
+            ->get();
 
         return view('history', compact('tasks'));
     }

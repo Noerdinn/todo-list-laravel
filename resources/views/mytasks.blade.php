@@ -3,9 +3,9 @@
 @section('content')
 
     <div
-        class=" p-6 h-full scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full container-pattern">
+        class=" p-3 md:p-6 h-full scrollbar-thin scrollbar-thumb-black  scrollbar-track-transparent scrollbar-thumb-rounded-full container-pattern">
         <div
-            class="grid md:grid-rows-[auto_1fr] grid-rows-[min-content_1fr] grid-cols-2 md:gap-4 gap-4 font-MadeforText h-full">
+            class="grid md:grid-rows-[auto_1fr] grid-rows-[min-content_1fr] grid-cols-2 md:gap-4 gap-3 font-MadeforText h-full">
             <div class="row-start-1 h-min">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
                     <div class="md:col-span-4">
@@ -26,7 +26,7 @@
 
 
             <div {{-- konten task --}}
-                class="row-start-2 min-h-[60vh] max-h-[calc(100vh-185px)] md:col-span-1 col-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent scrollbar-thumb-rounded-full p-5 border-2 rounded-lg border-black shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] me-0 mb-0 md:me-2 md:mb-2 bg-white flex flex-col ">
+                class="row-start-2 min-h-[60vh] max-h-[calc(100vh-185px)] md:col-span-1 col-span-full overflow-y-auto scrollbar-thin scrollbar-thumb-black scrollbar-track-transparent scrollbar-thumb-rounded-full md:p-5 p-3 border-2 rounded-lg border-black shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] me-0 mb-0 md:me-2 md:mb-2 bg-white flex flex-col ">
                 <div class="flex mb-3">
                     <p class="md:text-xl text-base font-medium">Task</p>
                 </div>
@@ -38,7 +38,7 @@
                             class="task-item flex
                                 justify-between py-2 px-3 md:px-4 mb-3 md:mb-4 border-2 rounded-lg border-black transition-all ease-out 
                                 shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] overflow-x-hidden hover:shadow-none hover:translate-y-[3px] hover:bg-[#EAE9E5] cursor-pointer">
-                            <div class="flex justify-between items-center w-full">
+                            <div class="flex justify-between items-center w-full gap-3">
 
                                 {{-- update is_complete selesai atau tidak selesai menggunakan ajax --}}
 
@@ -56,7 +56,7 @@
 
                                     {{-- title task --}}
                                     <div class="flex ">
-                                        <p class="title-task mx-2 md:mx-3 md:text-base text-sm self-center font-medium duration-1000 capitalize transition-transform   {{ $task->is_complete ? 'line-through' : '' }}"
+                                        <p class="title-task mx-2 md:mx-3 md:text-base text-xs self-center font-medium duration-1000 capitalize transition-transform   {{ $task->is_complete ? 'line-through' : '' }}"
                                             data-task-id="{{ $task->id }}">
                                             {{ $task->title }}</p>
                                     </div>

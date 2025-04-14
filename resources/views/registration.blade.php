@@ -63,7 +63,7 @@
                             @enderror
                             <div class="mt-2">
                                 <input type="email" name="email" id="email" autocomplete="email" required
-                                    class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
+                                    class="w-full lowercase rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
                                     placeholder="Email" value="{{ old('email') }}">
                             </div>
                         </div>

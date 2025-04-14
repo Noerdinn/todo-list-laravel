@@ -12,7 +12,7 @@
         <div class="grid gap-4 mb-4 grid-cols-2">
             <div class="col-span-2">
                 <label for="title" class="block md:text-base text-base font-semibold text-black">Title</label>
-                <input type="text" name="title" id="edit-title"
+                <input type="text" name="title" id="edit-title" maxlength="30"
                     class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium  rounded-lg outline-none block w-full md:p-2.5 p-2"
                     required value="{{ $task->title }}">
             </div>
