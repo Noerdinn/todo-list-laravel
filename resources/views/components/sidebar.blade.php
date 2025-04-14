@@ -53,7 +53,7 @@
                         </div>
                         <p class="text-sm capitalize truncate" title="{{ $user->name }}">
                             {{ $user->name }}</p>
-                        <p class="text-sm lowercase">{{ $user->email }}</p>
+                        <p class="text-sm lowercase truncate" title="{{ $user->email }}">{{ $user->email }}</p>
                         <button id="logout-btn"
                             class="flex w-full items-center py-2 justify-center rounded-lg text-white border-black transition-all border-2 my-3 bg-[#E85446] hover:bg-[#cf4a3e] hover:translate-y-[3px] shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[0px_0px_0px_0px_rgba(0,0,0,1)]">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>
