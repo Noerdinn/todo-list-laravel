@@ -57,7 +57,7 @@
             </div>
             <div
                 class="block md:hidden w-full h-fit rounded-lg overflow-hidden border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
-                <img src="{{ asset('img/Mobile Asset 2.jpg') }}" alt="Tampilan" class="w-full h-auto object-cover">
+                <img src="{{ asset('img/Mobile Asset 2.png') }}" alt="Tampilan" class="w-full h-auto object-cover">
             </div>
         </div>
     </div>
