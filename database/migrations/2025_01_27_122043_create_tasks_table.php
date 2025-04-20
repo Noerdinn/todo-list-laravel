@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('is_complete')->default(false);
             $table->enum('priority', ['low', 'medium', 'high'])->default('medium');
             $table->date('complete_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

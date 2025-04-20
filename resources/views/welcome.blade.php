@@ -51,9 +51,8 @@
         </div>
 
         <div class="md:col-span-3 col-span-full flex md:justify-end justify-center ">
-            <div
-                class="hidden md:block md:w-[90%] w-full rounded-lg overflow-hidden border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">
-                <img src="{{ asset('img/Home Page.png') }}" alt="Home Page" class="w-full h-auto object-cover">
+            <div class="hidden md:block md:w-[90%] w-full rounded-lg overflow-hidden ">
+                <img src="{{ asset('img/Tasks 3.jpg') }}" alt="Home Page" class="w-full h-auto object-cover">
             </div>
             <div
                 class="block md:hidden w-full h-fit rounded-lg overflow-hidden border-2 border-black shadow-[0px_8px_0px_0px_rgba(0,0,0,1)]">

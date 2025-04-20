@@ -25,8 +25,11 @@ Route::middleware('auth')->group(function () {
     // mensubmit form update
     Route::put('/mytasks/{task}', [TaskController::class, 'update'])->name('mytasks.update');
     Route::delete('/mytask/{id}', [TaskController::class, 'destroy'])->name('mytasks.delete');
+    Route::delete('/mytask/{id}/delete', [TaskController::class, 'forceDelete'])->name('history.delete');
     // toggle untuk button mark as complete
     Route::post('/mytasks/{task}/toggle', [TaskController::class, 'toggleStatus'])->name('mytask.toggle');
+    // reminder task
+    Route::get('/mytasks/reminder', [TaskController::class, 'getReminderTask']);
 
     // SUBTASK
     // menampilkan subtask

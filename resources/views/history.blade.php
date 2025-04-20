@@ -27,15 +27,18 @@
                             <th scope="col" class="pe-6 py-3">
                                 Deadline
                             </th>
-                            <th scope="col" class="pe-6 py-3 text-nowrap">
+                            <th scope="col" class="pe-3 py-3 text-nowrap">
                                 Complete At
+                            </th>
+                            <th scope="col" class="pe-3 py-3 flex justify-center items-center">
+                                Delete
                             </th>
                         </tr>
                     </thead>
                     <tbody class="md:text-base text-xs bg-white">
                         @if ($tasks->isEmpty())
-                            <tr>
-                                <td colspan="7" class="px-6 py-4 text-center text-black">
+                            <tr class="bg-white border-t-2 border-black text-nowrap">
+                                <td colspan="8" class="px-6 py-4 text-center text-black">
                                     Saat ini belum ada task yang selesai
                                 </td>
                             </tr>
@@ -77,10 +80,27 @@
                                             {{ \Carbon\Carbon::parse($task->deadline)->format('d M Y') }}
                                         </div>
                                     </td>
-                                    <td class="pe-6 py-4 font-medium text-nowrap ">
+                                    <td class="pe-3 py-4 font-medium text-nowrap ">
                                         <div class="flex gap-2 items-center">
                                             <i class="fa-solid fa-clock"></i>
                                             {{ \Carbon\Carbon::parse($task->complete_at)->format('d M Y') }}
+                                        </div>
+                                    </td>
+                                    {{-- hard delete task --}}
+                                    <td class="pe-3">
+                                        <div class="flex items-center justify-center">
+                                            <button
+                                                class="force-delete-task py-1.5 px-3 md:text-sm text-xs rounded-lg border-2 border-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all ease-out bg-[#E85446] text-white"
+                                                data-task-id="{{ $task->id }}" title="Delete task">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+
+                                            <form id="force-delete-form-{{ $task->id }}"
+                                                action="{{ route('history.delete', $task->id) }}" method="POST"
+                                                class="hidden">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

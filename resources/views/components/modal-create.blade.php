@@ -24,20 +24,22 @@
                 @csrf
                 <div class="grid gap-2 mb-4 grid-cols-2">
                     <div class="col-span-2">
-                        <label for="title"
-                            class="block md:text-base text-base font-semibold text-black">Title</label>
+                        <label for="title" class="block md:text-base text-base font-semibold text-black"
+                            title="required">Title<strong class="text-red-500">*</strong></label>
                         <input type="text" name="title" id="title" placeholder="30 Character Max"
                             maxlength="30"
                             class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium placeholder:text-black/50 rounded-lg outline-none block w-full md:p-2.5 p-2"
                             required>
                     </div>
                     <div class="col-span-2">
-                        <label for="description" class="block text-base font-semibold text-black">Description</label>
+                        <label for="description" class="block text-base font-semibold text-black">Description
+                            (Optional)</label>
                         <textarea name="description" type="text" id="description" rows="2"
                             class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full md:p-2.5 p-2"></textarea>
                     </div>
                     <div class="sm:col-span-1">
-                        <label for="deadline" class="block text-base font-semibold text-black">Deadline</label>
+                        <label for="deadline" class="block text-base font-semibold text-black"
+                            title="required">Deadline<strong class="text-red-500">*</strong></label>
 
                         <div class="relative max-w-sm">
                             <input id="deadline" type="date" name="deadline"
@@ -47,8 +49,8 @@
 
                     </div>
                     <div class="sm:col-span-1">
-                        <label for="priority" class="block text-base font-semibold text-black">Select
-                            Priority</label>
+                        <label for="priority" class="block text-base font-semibold text-black" title="required">Select
+                            Priority<strong class="text-red-500">*</strong></label>
                         <select id="priority" name="priority"
                             class="bg-white shadow-black shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none transition-all focus:translate-y-[3px] border-2 border-black text-black text-sm font-medium rounded-lg outline-none block w-full md:p-2.5 p-2">
                             {{-- <option selected>Skala Prioritas</option> --}}

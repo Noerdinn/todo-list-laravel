@@ -56,7 +56,7 @@
 
                                     {{-- title task --}}
                                     <div class="flex ">
-                                        <p class="title-task mx-2 md:mx-3 md:text-base text-xs self-center font-medium duration-1000 capitalize transition-transform   {{ $task->is_complete ? 'line-through' : '' }}"
+                                        <p class="title-task mx-2 md:mx-3 md:text-base text-xs self-center font-medium duration-1000 capitalize transition-transform   {{ $task->is_complete ? 'line-through' : '' }} {{ $taskLampau->contains('id', $task->id) ? 'text-red-500' : '' }}"
                                             data-task-id="{{ $task->id }}">
                                             {{ $task->title }}</p>
                                     </div>
@@ -64,7 +64,7 @@
                                     {{-- icon clock reminder --}}
                                     {{-- jika deadline hari ini/besok dan belum selesai --}}
                                     <div
-                                        class="flex reminder-icon items-center {{ $reminderTask->contains('id', $task->id) && !$task->is_complete ? '' : 'hidden' }}">
+                                        class="flex reminder-icon items-center {{ $reminderTask->contains('id', $task->id) ? '' : 'hidden' }}">
 
                                         <i class="fa-solid fa-stopwatch animate-wiggle text-[#E85446] md:text-xl text-sm"
                                             title="Deadline dalam 1 hari"></i>

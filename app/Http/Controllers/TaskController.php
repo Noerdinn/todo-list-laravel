@@ -21,11 +21,36 @@ class TaskController extends Controller
 
         // mencari deadline hari ini dan besok
         $reminderTask = Task::where('user_id', Auth::id())
+            ->where('is_complete', false)
             ->whereDate('deadline', '<=', Carbon::now()->addDays(1))
             ->whereDate('deadline', '>=', Carbon::now())
             ->get();
 
-        return view('mytasks', compact('tasks', 'reminderTask'));
+        $taskLampau = Task::where('user_id', Auth::id())
+            ->where('is_complete', false)
+            ->whereDate('deadline', '<', Carbon::now()->endOfDay())
+            ->get();
+
+        return view('mytasks', compact('tasks', 'reminderTask', 'taskLampau'));
+    }
+    public function getReminderTask()
+    {
+        // mencari deadline hari ini dan besok
+        $reminderTask = Task::where('user_id', Auth::id())
+            ->where('is_complete', false)
+            ->whereDate('deadline', '<=', Carbon::now()->addDays(1))
+            ->whereDate('deadline', '>=', Carbon::now())
+            ->get();
+
+        $lateTask = Task::where('user_id', Auth::id())
+            ->where('is_complete', false)
+            ->whereDate('deadline', '<', Carbon::now()->endOfDay())
+            ->get();
+
+        return response()->json([
+            'reminderTask' => $reminderTask,
+            'lateTask' => $lateTask
+        ]);
     }
     // create subtask
     public function store(Request $request)
@@ -87,20 +112,39 @@ class TaskController extends Controller
 
         return response()->json(['message' => 'Task updated successfully']);
     }
-    // hapus task
+    // hapus task (soft delete)
     public function destroy(string $id)
     {
-        $task = Task::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-        $task->delete();
+        $task = Task::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+        if ($task->complete_at) {
+            // sudah selesai soft delete
+            $task->delete();
+        } else {
+            // kalo belum selesai hard delete
+            $task->forceDelete();
+        }
 
         return redirect()->route('mytasks.page')->with('success', 'Task delete successfully');
+    }
+    // hapus task (hard delete)
+    public function forceDelete(string $id)
+    {
+        $task = Task::withTrashed('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        $task->forceDelete();
+
+
+        return redirect()->route('history.page')->with('success', 'Task delete successfully');
     }
     // menampilkan task history
     public function showHistory()
     {
-        $tasks = Task::where('user_id', Auth::id())
-            ->where('is_complete', true)
-            // ->orderBy('complete_at', 'desc')
+        $tasks = Task::withTrashed('user_id', Auth::id())
+            ->whereNotNull('complete_at')
             ->get();
 
         return view('history', compact('tasks'));

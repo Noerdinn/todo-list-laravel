@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
             setTimeout(() => {
                 loadingScreen.style.display = "none";
             }, 500);
-        });
+        }, 500);
     }
 });
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,6 +49,7 @@ async function showDetailTask(taskId = null) {
     try {
         const response = await fetch(`/mytasks/${taskId}/subtasks`);
         if (!response.ok) throw new Error("Gagal mengambil data subtasks.");
+        fetchReminderTask();
 
         // menyisipkan content html
         const html = await response.text();
@@ -67,6 +68,38 @@ async function showDetailTask(taskId = null) {
         showAlert("error", error.message);
     }
 }
+
+async function fetchReminderTask() {
+    try {
+        const response = await fetch(`/mytasks/reminder`);
+
+        if (!response.ok) {
+            throw new Error("Gagal mengambil reminder");
+        }
+
+        const data = await response.json();
+
+        console.log("late task: ", data.lateTask);
+
+        getLateTask(data.lateTask);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+function getLateTask(tasks) {
+    tasks.forEach((task) => {
+        const deadlineElement = document.querySelector(
+            `[data-task-deadline='${task.id}']`
+        );
+
+        if (deadlineElement) {
+            deadlineElement.classList.add("text-red-500");
+            deadlineElement.insertAdjacentText("beforeend", "(Terlambat)");
+        }
+    });
+}
+
 // fungsi untuk tombol mengubah status task
 window.toggleTaskStatus = function (taskId) {
     // location.reload();
@@ -107,8 +140,38 @@ window.toggleTaskStatus = function (taskId) {
 };
 // fungsi untuk menghapus task utama
 document.addEventListener("click", function (event) {
+    // soft delete
     if (event.target.closest(".delete-task")) {
         let button = event.target.closest(".delete-task");
+        let taskId = button.getAttribute("data-task-id");
+
+        // alert delete task
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This task will be deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel",
+            customClass: {
+                popup: "custom-swal-popup",
+                title: "custom-swal-title", // Untuk judul
+                content: "custom-swal-content", // Untuk teks isi
+                confirmButton: "custom-swal-delete-button",
+                cancelButton: "custom-swal-cancel-button",
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`delete-form-${taskId}`).submit();
+            }
+        });
+    }
+
+    // hard delete
+    if (event.target.closest(".force-delete-task")) {
+        let button = event.target.closest(".force-delete-task");
         let taskId = button.getAttribute("data-task-id");
 
         // alert delete task
@@ -130,7 +193,7 @@ document.addEventListener("click", function (event) {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById(`delete-form-${taskId}`).submit();
+                document.getElementById(`force-delete-form-${taskId}`).submit();
             }
         });
     }
@@ -163,6 +226,7 @@ async function updateTask(event, taskId) {
     const formData = new FormData(form);
 
     try {
+        // location.reload();
         const response = await fetch(`/mytasks/${taskId}`, {
             method: "POST",
             body: formData,

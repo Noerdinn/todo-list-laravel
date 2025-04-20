@@ -28,8 +28,8 @@
 
             {{-- Deadline --}}
             <p class="md:text-lg text-sm font-medium">Deadline</p>
-            <p class="flex items-center gap-1.5 md:text-sm text-sm ">
-                <i class="fa-solid fa-stopwatch text-black "></i>
+            <p data-task-deadline='{{ $task->id }}' class="flex items-center gap-1.5 md:text-sm text-sm ">
+                <i class="fa-solid fa-stopwatch"></i>
                 {{ \Carbon\Carbon::parse($task->deadline)->format('d F Y') }}
             </p>
 
@@ -69,10 +69,10 @@
                     data-task-id="{{ $task->id }}">
                     <div class="block md:hidden">
                     </div>
-                    {{-- <i class="fa-regular fa-circle-check "></i> --}}
                     <i class="fa-solid fa-circle-check"></i>
                     <span class="hidden md:block">Complete Task</span>
                 </button>
+
             </div>
 
             {{-- trigger delete task --}}
@@ -112,6 +112,16 @@
     {{-- menampilkan subtask --}}
     <div class="mt-4 ">
         <p class="md:text-lg text-base font-medium mb-2">Subtasks</p>
+        <div class="mb-4 bg-white {{ $task->is_complete ? 'hidden' : '' }}">
+            <div class="flex items-center gap-3">
+                {{-- untuk menambahkan subtask --}}
+                <input type="text" id="subtask-title"
+                    class="md:text-base text-sm border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
+                    placeholder="Add new subtask (30 Max)" maxlength="30">
+                <button id="add-subtask-btn"
+                    class="md:text-base text-sm shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all mb-1 border-black border-2 text-white bg-[#3D97CC] p-2 px-4 rounded-lg">+Add</button>
+            </div>
+        </div>
         <div id="subtasks-container">
             @foreach ($task->subtasks as $subtask)
                 @include('tasks.subtask', ['subtask' => $subtask, 'task' => $task])
@@ -119,14 +129,4 @@
         </div>
     </div>
 
-</div>
-<div class="sticky bottom-0 p-4 bg-white {{ $task->is_complete ? 'hidden' : '' }}">
-    <div class="flex items-center gap-3">
-        {{-- untuk menambahkan subtask --}}
-        <input type="text" id="subtask-title"
-            class="md:text-base text-sm border-2 border-black w-full p-2 rounded-lg outline-none placeholder:text-black"
-            placeholder="Add new subtask (30 Max)" maxlength="30">
-        <button id="add-subtask-btn"
-            class="md:text-base text-sm shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[3px] hover:shadow-none transition-all mb-1 border-black border-2 text-white bg-[#3D97CC] p-2 px-4 rounded-lg">+Add</button>
-    </div>
 </div>
