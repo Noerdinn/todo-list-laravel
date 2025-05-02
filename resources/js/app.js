@@ -18,6 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
     showDetailTask(null);
 });
 
+// fish eye
+function togglePassword() {
+    const passwordInput = document.getElementById("password");
+    const type =
+        passwordInput.getAttribute("type") === "password" ? "text" : "password";
+    passwordInput.setAttribute("type", type);
+}
+
 // fungsi untuk menampilkan detail task
 async function showDetailTask(taskId = null) {
     const taskDetailContainer = document.getElementById(
@@ -339,3 +347,4 @@ async function handleDeleteSubtask(event) {
 window.showDetailTask = showDetailTask;
 window.showEditTask = showEditTask;
 window.updateTask = updateTask;
+window.togglePassword = togglePassword;

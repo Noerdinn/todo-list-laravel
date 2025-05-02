@@ -75,11 +75,17 @@
                             @error('password')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
-                            <div class="mt-2">
+                            <div class="mt-2 flex gap-2">
                                 <input type="password" name="password" id="password" autocomplete="current-password"
                                     required
                                     class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
                                     placeholder="Password" value="{{ old('password') }}">
+                                <div>
+                                    <button type="button" onclick="togglePassword()"
+                                        class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 h-full text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60 h-100">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

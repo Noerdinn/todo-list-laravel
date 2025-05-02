@@ -29,7 +29,8 @@
             class="flex md:col-span-1 col-span-full md:h-full h-fit py-10 md:py-0 self-center items-center lg:border-2 border-0 border-black px-6 md:px-10 2xl:px-0 rounded-lg lg:shadow-[0px_6px_0px_0px_rgba(0,0,0,1)] shadow-none">
             <div class="container">
                 <div class="w-full">
-                    <img class="h-14 2xl:h-20 mx-auto mb-4" src="{{ asset('img/Neo List icon.png') }}" alt="">
+                    <img class="h-14 2xl:h-20 mx-auto mb-4" src="{{ asset('img/Neo List icon.png') }}"
+                        alt="Neo List Icon">
                 </div>
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     {{-- <p
@@ -79,11 +80,17 @@
                             @if (session('password'))
                                 <p class="text-red-600 text-sm">{{ session('password') }}</p>
                             @endif
-                            <div class="mt-2">
+                            <div class="mt-2 flex gap-2">
                                 <input type="password" name="password" id="password" autocomplete="current-password"
                                     required placeholder="Password"
                                     class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60"
                                     value="{{ old('password') }}">
+                                <div>
+                                    <button type="button" onclick="togglePassword()"
+                                        class="w-full rounded-md border-2 border-black bg-white px-3 py-1.5 h-full text-base text-black outline-none shadow-[0px_3px_0px_0px_rgba(0,0,0,1)] focus:shadow-none focus:translate-y-[3px] transition-all ease-out placeholder:text-black/60">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

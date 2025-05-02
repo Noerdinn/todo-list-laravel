@@ -3,7 +3,6 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SubtaskController;
 use App\Http\Controllers\TaskController;
-use App\Models\Task;
 use Illuminate\Support\Facades\Route;
 
 Route::model('task', \App\Models\Task::class);
